@@ -100,12 +100,13 @@ fun SettingsScreen(
     }
 }
 
-/** The language of the app: the phone's own, Portuguese or English; the screens are redrawn at once. */
+/** The language of the app: the phone's own, Portuguese, English or Spanish; the screens are redrawn at once. */
 @Composable
 private fun LanguageGroup(onLanguage: (AppLanguage) -> Unit) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val names = mapOf(
         AppLanguage.AUTO to R.string.language_auto, AppLanguage.PT to R.string.language_pt, AppLanguage.EN to R.string.language_en,
+        AppLanguage.ES to R.string.language_es,
     )
     // Held here, not read from the system at each draw: choosing the language the phone already speaks (Portuguese on a
     // Portuguese phone, or back to Automatic from it) changes no configuration, so the system recreates nothing and
