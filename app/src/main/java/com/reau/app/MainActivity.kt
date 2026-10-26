@@ -59,6 +59,9 @@ import kotlin.concurrent.thread
 class MainActivity : ComponentActivity() {
     private var androidAutoVersion by mutableStateOf<String?>(null)
 
+    // Whether REau is on screen (between onResume and onPause), for what opens Android Auto's settings by itself.
+    private var onScreen by mutableStateOf(false)
+
     // REau's accessibility service, read again at each return to the screen.
     private var accessibility by mutableStateOf(AaServerStarter.Accessibility.OFF)
     private var permissionRows by mutableStateOf(emptyList<com.reau.app.settings.AppPermissions.Row>())
@@ -166,6 +169,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(dashSearch)
+        if (savedInstanceState == null) quickStart(intent)
         // The accessibility service connects some seconds after the app starts (after an install): the state is read again then.
         lifecycleScope.launch {
             repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
@@ -192,6 +196,15 @@ class MainActivity : ComponentActivity() {
             var settings by remember(settingsVersion) { mutableStateOf(store.load()) }
             var pairing by remember(pairingVersion) { mutableStateOf(pairingStore.toUi()) }
             com.reau.app.ui.BatteryWatch.Follow(this) { battery = it }
+            // Lite: the server is switched on by hand, so Android Auto's settings open by themselves, once per projection.
+            var aaSettingsOpened by remember(startedAt) { mutableStateOf(false) }
+            androidx.compose.runtime.LaunchedEffect(projection.androidAuto, startedAt, onScreen, androidAutoVersion) {
+                if (AndroidAuto.opensSettingsByItself(projection.androidAuto, aaSettingsOpened, onScreen, androidAutoVersion != null)) {
+                    aaSettingsOpened = true
+                    RideDiagnostics.log("aa-server", "the head unit server is off: Android Auto's settings open by themselves")
+                    openAndroidAutoSettings()
+                }
+            }
 
             val saveSettings: (REauSettings) -> Unit = { settings = saved(store, settings, it) }
             val reload = { settings = store.load(); pairing = pairingStore.toUi() }
@@ -379,8 +392,29 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onPause() {
+        onScreen = false
+        super.onPause()
+    }
+
+    // The launcher shortcut and the quick settings tile (QuickStart) arrive here: REau opens and, if it is off, switches on.
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        quickStart(intent)
+    }
+
+    private fun quickStart(intent: Intent?) {
+        if (!com.reau.app.service.QuickStart.switchesOn(intent?.action, ProjectionService.projection.value.phase)) return
+        // Handled once: a rotation or a recreation must not switch it on again.
+        intent?.action = null
+        RideDiagnostics.log("ui", "the rider switched the projection on from the shortcut or the tile")
+        start(card = false)
+    }
+
     override fun onResume() {
         super.onResume()
+        onScreen = true
         if (leftForAaSettingsAtMs != 0L) {
             val away = (android.os.SystemClock.elapsedRealtime() - leftForAaSettingsAtMs) / 1_000
             RideDiagnostics.log("aa-server", "rider back from Android Auto settings after $away s")

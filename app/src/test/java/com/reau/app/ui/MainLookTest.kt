@@ -2,6 +2,7 @@ package com.reau.app.ui
 
 import com.reau.app.R
 import com.reau.app.aa.AaLinkState
+import com.reau.app.aa.AndroidAuto
 import com.reau.app.aa.ServerResult
 import com.reau.app.service.AaServerStarter
 import com.reau.app.service.DashLink
@@ -18,6 +19,20 @@ import org.junit.Test
 class MainLookTest {
     private fun running(aa: AaLinkState = AaLinkState.CONNECTING, dash: DashLink = DashLink.CONNECTING, card: Boolean = false) =
         Projection(phase = Phase.RUNNING, androidAuto = aa, dash = dash, card = card)
+
+    @Test
+    fun `Lite takes the rider to Android Auto's settings once, only on screen with Android Auto installed`() {
+        fun opens(
+            link: AaLinkState = AaLinkState.SERVER_OFF, opened: Boolean = false, onScreen: Boolean = true,
+            installed: Boolean = true, lite: Boolean = true,
+        ) = AndroidAuto.opensSettingsByItself(link, opened, onScreen, installed, lite)
+        assertEquals(true, opens())
+        assertEquals(false, opens(opened = true))
+        assertEquals(false, opens(onScreen = false))
+        assertEquals(false, opens(installed = false))
+        assertEquals(false, opens(lite = false))
+        AaLinkState.entries.filter { it != AaLinkState.SERVER_OFF }.forEach { assertEquals(false, opens(link = it)) }
+    }
 
     @Test
     fun `each Android Auto state takes its colour`() {
