@@ -38,14 +38,15 @@ class LiteTextsTest {
 
     private fun strings(flavor: String, folder: String) = read(File(src, "$flavor/res/$folder/strings.xml"))
 
-    /** The texts [folder] ("values" or "values-pt") shows in the Lite: main's, and over them the Lite's own. */
+    /** The texts [folder] ("values", "values-pt" or "values-es") shows in the Lite: main's, and over them the Lite's own. */
     private fun lite(folder: String): Map<String, String> = strings("main", folder) + strings("lite", folder)
 
     /** What the phone shows in Portuguese: the Portuguese texts over the default (English) ones. */
     private fun liteIn(folder: String): Map<String, String> = if (folder == "values") lite("values") else lite("values") + lite(folder)
 
     private val folders = listOf("values", "values-pt")
-    private val words = Regex("accessib|acessibil|restricted setting|configura[çc][õo]es? restritas?", RegexOption.IGNORE_CASE)
+    private val allFolders = folders + "values-es"
+    private val words = Regex("accessib|acessibil|accesibil|restricted setting|configura[çc][õo]es? restritas?|ajustes? restringidos?", RegexOption.IGNORE_CASE)
 
     private val names: Map<Int, String> = R.string::class.java.declaredFields
         .filter { Modifier.isStatic(it.modifiers) && it.type == Int::class.javaPrimitiveType }
@@ -55,7 +56,7 @@ class LiteTextsTest {
 
     @Test
     fun `no text of the Lite edition mentions accessibility`() {
-        for (folder in folders) {
+        for (folder in allFolders) {
             val offenders = liteIn(folder).filterValues { words.containsMatchIn(it) }.keys
             assertEquals("texts of the Lite ($folder) that speak of accessibility", emptySet<String>(), offenders)
         }
@@ -63,7 +64,7 @@ class LiteTextsTest {
 
     @Test
     fun `every text of the full edition about accessibility is overridden by the Lite, and the Lite adds no text of its own name`() {
-        for (folder in folders) {
+        for (folder in allFolders) {
             val main = strings("main", folder)
             val own = strings("lite", folder)
             val aboutIt = main.filterValues { words.containsMatchIn(it) }.keys
@@ -142,9 +143,10 @@ class LiteTextsTest {
     @Test
     fun `a mute server sends the Lite rider to the menu of Android Auto, never to the force stop`() {
         val keys = listOf("aa_unresponsive_by_hand_warning", "sub_unresponsive_by_hand", "notif_text_unresponsive_by_hand")
-        val force = mapOf("values" to Regex("force", RegexOption.IGNORE_CASE), "values-pt" to Regex("for[\u00e7c]", RegexOption.IGNORE_CASE))
-        val head = mapOf("values" to "head unit server", "values-pt" to "servidor")
-        for (folder in folders) {
+        val force0 = mapOf("values" to Regex("force", RegexOption.IGNORE_CASE), "values-pt" to Regex("for[\u00e7c]", RegexOption.IGNORE_CASE))
+        val head = mapOf("values" to "head unit server", "values-pt" to "servidor", "values-es" to "servidor de unidad principal")
+        val force = force0 + ("values-es" to Regex("fuerza", RegexOption.IGNORE_CASE))
+        for (folder in allFolders) {
             val shown = liteIn(folder)
             for (key in keys) {
                 val text = shown[key] ?: error("$key has no text in $folder")
@@ -166,12 +168,15 @@ class LiteTextsTest {
     fun `the server card of the Lite says the manual step and that the server must be turned on again every time`() {
         val en = liteIn("values")
         val pt = liteIn("values-pt")
+        val es = liteIn("values-es")
         val card = "server_warning"
         assertTrue(en.getValue(card), "Start head unit server" in en.getValue(card))
         assertTrue(pt.getValue(card), "Iniciar servidor da unidade principal" in pt.getValue(card))
         // The truth: Android Auto closes the server when the session ends, so it is turned on at each session.
         assertTrue(en.getValue(card), "turns off when the session ends" in en.getValue(card) && "every time" in en.getValue(card))
         assertTrue(pt.getValue(card), "desliga quando a sessão termina" in pt.getValue(card) && "a cada vez" in pt.getValue(card))
+        assertTrue(es.getValue(card), "Iniciar servidor de unidad principal" in es.getValue(card))
+        assertTrue(es.getValue(card), "se apaga cuando termina la sesión" in es.getValue(card) && "cada vez" in es.getValue(card))
         assertEquals("the way to Android Auto's settings stays", "Abrir as configurações do Android Auto", pt.getValue("action_open_aa_settings"))
         assertTrue(en.getValue("action_open_aa_settings").isNotBlank())
         // The full edition keeps its own text (it turns the server on and off by itself).

@@ -6,9 +6,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * The app's texts in its two languages (English is the base, `values/`; Portuguese is `values-pt/`): every text is in both,
- * with the same placeholders, and no English text is still Portuguese. A text added in one language only, or with a
- * `%1$s` lost in the translation, would show as a crash or as a gap in one language only.
+ * The app's texts in its three languages (English is the base, `values/`; Portuguese is `values-pt/`; Spanish is `values-es/`):
+ * every text is in all, with the same placeholders, and no English text is still Portuguese. A text added in one language only,
+ * or with a `%1$s` lost in the translation, would show as a crash or as a gap in one language only.
  */
 class StringsParityTest {
     private class Text(val name: String, val translatable: Boolean, val value: String, val plural: Boolean = false)
@@ -30,6 +30,7 @@ class StringsParityTest {
 
     private val english = read("values")
     private val portuguese = read("values-pt")
+    private val spanish = read("values-es")
     private val placeholder = Regex("""%(?:\d+\$)?[sdfx%]""")
 
     @Test
@@ -67,6 +68,41 @@ class StringsParityTest {
             "app_name", "language_pt", "language_en", "terms_lang_pt", "terms_lang_en",
         )
         val equal = english.filter { (name, en) -> en.translatable && name !in same && portuguese[name]?.value == en.value && en.value.any { it.isLetter() } }
+        // Words that are the same in both languages (Wi-Fi, Android Auto, Gemini, ...) are fine; this list only shows what to look at.
+        assertTrue("same in both languages, check they are not untranslated: ${equal.keys}", equal.size < 60)
+    }
+
+    @Test
+    fun `every translatable text is in Spanish too`() {
+        val translatableEnglish = english.filterValues { it.translatable }.keys
+        val translatableSpanish = spanish.filterValues { it.translatable }.keys
+        assertEquals("only in English: ${translatableEnglish - translatableSpanish}", emptySet<String>(), translatableEnglish - translatableSpanish)
+        assertEquals("only in Spanish: ${translatableSpanish - translatableEnglish}", emptySet<String>(), translatableSpanish - translatableEnglish)
+    }
+
+    @Test
+    fun `a text keeps its placeholders in the Spanish translation`() {
+        for ((name, es) in spanish) {
+            val en = english[name] ?: continue
+            fun marks(text: Text) = placeholder.findAll(text.value).map { it.value }.sorted().toList().let { if (es.plural) it.distinct() else it }
+            assertEquals("$name: placeholders", marks(es), marks(en))
+        }
+    }
+
+    @Test
+    fun `no Spanish text is Portuguese`() {
+        val portugueseLetters = Regex("[ãõçÃÕÇ]")
+        val portugueseWords = Regex("""\b(você|não|isso|são|painel|ligação|enquanto)\b""", RegexOption.IGNORE_CASE)
+        for ((name, es) in spanish) {
+            if (!es.translatable) continue
+            assertTrue("$name looks Portuguese: ${es.value.take(80)}", !portugueseLetters.containsMatchIn(es.value) && !portugueseWords.containsMatchIn(es.value))
+        }
+    }
+
+    @Test
+    fun `a Spanish text is not the English one, except names and numbers that are the same word in both`() {
+        val same = setOf("app_name", "language_pt", "language_en", "language_es", "terms_lang_pt", "terms_lang_en")
+        val equal = english.filter { (name, en) -> en.translatable && name !in same && spanish[name]?.value == en.value && en.value.any { it.isLetter() } }
         // Words that are the same in both languages (Wi-Fi, Android Auto, Gemini, ...) are fine; this list only shows what to look at.
         assertTrue("same in both languages, check they are not untranslated: ${equal.keys}", equal.size < 60)
     }

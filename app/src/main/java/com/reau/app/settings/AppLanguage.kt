@@ -9,11 +9,12 @@ import android.os.LocaleList
 import androidx.core.content.edit
 import java.util.Locale
 
-/** The language of the app's texts: the phone's own, or one of the two the app has. */
+/** The language of the app's texts: the phone's own, or one of the three the app has. */
 enum class AppLanguage(val tag: String) {
     AUTO(""),
     PT("pt-BR"),
     EN("en"),
+    ES("es"),
 }
 
 /**
@@ -25,11 +26,12 @@ object AppLanguages {
     private const val PREFS = "reau_language"
     private const val KEY = "tag"
 
-    /** The language a tag stands for: anything Portuguese is PT, anything English is EN, the rest (and none) AUTO. */
+    /** The language a tag stands for: anything Portuguese is PT, anything English is EN, anything Spanish is ES, the rest (and none) AUTO. */
     fun fromTag(tag: String?): AppLanguage = when {
         tag.isNullOrBlank() -> AppLanguage.AUTO
         tag.startsWith("pt", ignoreCase = true) -> AppLanguage.PT
         tag.startsWith("en", ignoreCase = true) -> AppLanguage.EN
+        tag.startsWith("es", ignoreCase = true) -> AppLanguage.ES
         else -> AppLanguage.AUTO
     }
 
