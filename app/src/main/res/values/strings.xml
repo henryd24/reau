@@ -336,6 +336,9 @@
     <string name="side_label_android_auto">Android Auto</string>
     <string name="side_label_picture">Picture</string>
     <string name="side_label_dash">Dash</string>
+    <!-- The launcher shortcut and the quick settings tile that switch the projection on (QuickStart). -->
+    <string name="quick_start_label">REau</string>
+    <string name="quick_start_long_label">Turn REau on</string>
     <string name="warn_server_title">Head unit server is off</string>
     <string name="warn_closing_previous_title">Closing the previous session</string>
     <string name="warn_unresponsive_title">Android Auto isn’t responding</string>

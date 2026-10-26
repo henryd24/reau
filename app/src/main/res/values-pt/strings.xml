@@ -327,6 +327,8 @@
     <string name="side_label_android_auto">Android Auto</string>
     <string name="side_label_picture">Imagem</string>
     <string name="side_label_dash">Painel</string>
+    <string name="quick_start_label">REau</string>
+    <string name="quick_start_long_label">Ligar o REau</string>
     <string name="warn_server_title">Servidor do Android Auto desligado</string>
     <string name="warn_closing_previous_title">Fechando a sessão anterior</string>
     <string name="warn_unresponsive_title">Android Auto não responde</string>
