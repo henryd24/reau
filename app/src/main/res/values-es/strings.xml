@@ -328,6 +328,8 @@
     <string name="side_label_android_auto">Android Auto</string>
     <string name="side_label_picture">Imagen</string>
     <string name="side_label_dash">Tablero</string>
+    <string name="quick_start_label">REau</string>
+    <string name="quick_start_long_label">Encender REau</string>
     <string name="warn_server_title">El servidor de unidad principal está apagado</string>
     <string name="warn_closing_previous_title">Cerrando la sesión anterior</string>
     <string name="warn_unresponsive_title">Android Auto no responde</string>
