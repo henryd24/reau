@@ -144,6 +144,8 @@
     <string name="joystick_title">Dash joystick</string>
     <string name="joystick_intro">Choose what each joystick tap does. Applies right away, even while the projection is on.</string>
     <string name="joystick_calls">Calls, in both modes: while ringing, left answers and right or center declines; during a call, center hangs up. Needs the \"Answer calls\" switch.</string>
+    <string name="joystick_arrows">Use the four arrows</string>
+    <string name="joystick_arrows_note">Moves Android Auto\'s focus up, down, left and right. In the map mode up is the dash\'s own, so only left, right and down; the apps menu is a double tap on back.</string>
     <string name="joystick_reset">Reset to default</string>
     <string name="joystick_control_left">Left</string>
     <string name="joystick_control_right">Right</string>
@@ -153,6 +155,10 @@
     <string name="joystick_action_nothing">Nothing</string>
     <string name="joystick_action_wheel_previous">Previous item</string>
     <string name="joystick_action_wheel_next">Next item</string>
+    <string name="joystick_action_focus_up">Focus up</string>
+    <string name="joystick_action_focus_down">Focus down</string>
+    <string name="joystick_action_focus_left">Focus left</string>
+    <string name="joystick_action_focus_right">Focus right</string>
     <string name="joystick_action_confirm">Confirm</string>
     <string name="joystick_action_back">Back</string>
     <string name="joystick_action_home">Apps menu</string>

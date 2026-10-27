@@ -125,4 +125,35 @@ class JoystickBindingsTest {
         assertEquals(Action.WHEEL_NEXT, page[Slot(Mode.MAP, Control.RIGHT, Gesture.ONCE)])
         assertEquals(Action.HOME, page[Slot(Mode.MEDIA, Control.CENTER, Gesture.ONCE)])
     }
+
+    // The four arrows move Android Auto's focus in two dimensions; none is a default.
+    @Test
+    fun `the arrows send the directional keys and survive a round trip`() {
+        val keys = mapOf(
+            Action.FOCUS_UP to ServiceDiscoveryResponse.KEY_UP, Action.FOCUS_DOWN to ServiceDiscoveryResponse.KEY_DOWN,
+            Action.FOCUS_LEFT to ServiceDiscoveryResponse.KEY_LEFT, Action.FOCUS_RIGHT to ServiceDiscoveryResponse.KEY_RIGHT,
+        )
+        for ((action, key) in keys) assertEquals(AaCommand.Key(key), action.command(false))
+        val page = JoystickBindings.DEFAULT
+            .with(Slot(Mode.MEDIA, Control.UP, Gesture.ONCE), Action.FOCUS_UP)
+            .with(Slot(Mode.MEDIA, Control.LEFT, Gesture.ONCE), Action.FOCUS_LEFT)
+        val back = JoystickBindings.decode(page.encode())
+        assertEquals(Action.FOCUS_UP, back[Slot(Mode.MEDIA, Control.UP, Gesture.ONCE)])
+        assertEquals(Action.FOCUS_LEFT, back[Slot(Mode.MEDIA, Control.LEFT, Gesture.ONCE)])
+        assertEquals(emptySet<Action>(), JoystickBindings.SLOTS.map { JoystickBindings.DEFAULT[it] }.toSet() intersect keys.keys)
+    }
+
+    @Test
+    fun `the arrows preset moves the focus in both modes and keeps the dash's own controls`() {
+        val page = JoystickBindings.decode(JoystickBindings.ARROWS.encode())
+        for (mode in Mode.entries) {
+            assertEquals(Action.FOCUS_LEFT, page[Slot(mode, Control.LEFT, Gesture.ONCE)])
+            assertEquals(Action.FOCUS_RIGHT, page[Slot(mode, Control.RIGHT, Gesture.ONCE)])
+            assertEquals(Action.FOCUS_DOWN, page[Slot(mode, Control.DOWN, Gesture.ONCE)])
+        }
+        assertEquals(Action.FOCUS_UP, page[Slot(Mode.MEDIA, Control.UP, Gesture.ONCE)])
+        assertEquals(Action.CONFIRM, page[Slot(Mode.MEDIA, Control.CENTER, Gesture.ONCE)])
+        assertEquals(Action.NOTHING, page[Slot(Mode.MAP, Control.UP, Gesture.ONCE)])
+        assertEquals(Action.NOTHING, page[Slot(Mode.MAP, Control.CENTER, Gesture.ONCE)])
+    }
 }

@@ -51,7 +51,7 @@ import com.reau.app.ui.theme.REauMono
 
 /**
  * The joystick page: the dash's two modes in tabs, the map mode first; the cross with what each control does; a
- * control picked, its one tap opens the 16 actions. One tap only (no hold; held choices saved before stay in the
+ * control picked, its one tap opens the actions. One tap only (no hold; held choices saved before stay in the
  * settings, unused as always). In the map mode, up and the centre are the dash's own and locked
  * ([JoystickBindings.LOCKED]). Every pick is handed over at once ([onSettings]); a running projection takes it at the
  * next tap.
@@ -106,6 +106,13 @@ fun JoystickScreen(settings: REauSettings, onSettings: (REauSettings) -> Unit, o
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.78f), modifier = Modifier.testTag("joystick_calls"),
                         )
                     }
+                    GhostButton(R.drawable.ic_ms_touch_app, stringResource(R.string.joystick_arrows), "arrows_joystick", {
+                        onSettings(settings.copy(joystick = JoystickBindings.ARROWS.encode()))
+                    })
+                    Text(
+                        stringResource(R.string.joystick_arrows_note),
+                        style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                     GhostButton(R.drawable.ic_ms_restart_alt, stringResource(R.string.joystick_reset), "reset_joystick", {
                         onSettings(settings.copy(joystick = ""))
                     })
@@ -228,6 +235,10 @@ private val ACTIONS = mapOf(
     Action.NOTHING to R.string.joystick_action_nothing,
     Action.WHEEL_PREVIOUS to R.string.joystick_action_wheel_previous,
     Action.WHEEL_NEXT to R.string.joystick_action_wheel_next,
+    Action.FOCUS_UP to R.string.joystick_action_focus_up,
+    Action.FOCUS_DOWN to R.string.joystick_action_focus_down,
+    Action.FOCUS_LEFT to R.string.joystick_action_focus_left,
+    Action.FOCUS_RIGHT to R.string.joystick_action_focus_right,
     Action.CONFIRM to R.string.joystick_action_confirm,
     Action.BACK to R.string.joystick_action_back,
     Action.HOME to R.string.joystick_action_home,

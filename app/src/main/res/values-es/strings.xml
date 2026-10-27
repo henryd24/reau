@@ -143,6 +143,8 @@
     <string name="joystick_title">Joystick del tablero</string>
     <string name="joystick_intro">Elige qué hace cada toque del joystick. Se aplica de inmediato, incluso con la proyección encendida.</string>
     <string name="joystick_calls">Llamadas, en los dos modos: mientras suena, la izquierda contesta y la derecha o el centro rechaza; durante una llamada, el centro cuelga. Necesita el interruptor \"Contestar llamadas\".</string>
+    <string name="joystick_arrows">Usar las cuatro flechas</string>
+    <string name="joystick_arrows_note">Mueve el foco de Android Auto arriba, abajo, izquierda y derecha. En el modo mapa arriba es del tablero, así que solo izquierda, derecha y abajo; el menú de apps es un doble toque en atrás.</string>
     <string name="joystick_reset">Restablecer al valor por defecto</string>
     <string name="joystick_control_left">Izquierda</string>
     <string name="joystick_control_right">Derecha</string>
@@ -152,6 +154,10 @@
     <string name="joystick_action_nothing">Nada</string>
     <string name="joystick_action_wheel_previous">Elemento anterior</string>
     <string name="joystick_action_wheel_next">Elemento siguiente</string>
+    <string name="joystick_action_focus_up">Foco arriba</string>
+    <string name="joystick_action_focus_down">Foco abajo</string>
+    <string name="joystick_action_focus_left">Foco a la izquierda</string>
+    <string name="joystick_action_focus_right">Foco a la derecha</string>
     <string name="joystick_action_confirm">Confirmar</string>
     <string name="joystick_action_back">Atrás</string>
     <string name="joystick_action_home">Menú de apps</string>
