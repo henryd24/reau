@@ -1,5 +1,7 @@
 # REau con una Himalayan 450 (tablero Tripper)
 
+English: [himalayan-450.md](himalayan-450.md)
+
 Guía en español, escrita con un Samsung S25 Ultra (Android 17, Android Auto 17.9) y una Himalayan 450. Lo que cambia en otro
 teléfono o con otro firmware, se dice donde corresponde. Lo que no se pudo comprobar, está marcado como **sin confirmar**.
 

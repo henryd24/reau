@@ -8,7 +8,7 @@ or the settings and see the result without going to the bike.
 
 What the fake dash does:
 
-- answers the key exchange (the RSA public key, `07 01 01`), so REau reaches "Transmitting";
+- answers the key exchange (the RSA public key, `07 01 01`), so REau reaches "Streaming";
 - sends a heartbeat, so REau's watchdog does not end the session, and confirms each frame it decodes (`09 06 55`, `09 04 55`);
 - **records the video** REau sends (the real 526×300 H.264 stream) so you can look at it;
 - **presses the joystick buttons** (`09 00 0001 XX`) when you ask.
@@ -47,7 +47,7 @@ Terminal 2:
 
 ```
 make phone-host     # tells the phone's debug app to use this computer as the dash
-make start          # switches REau on (or touch Encender on the phone)
+make start          # switches REau on (or touch Turn on on the phone)
 make button B=left  # presses a joystick button; see the list below
 make frames         # cuts the recorded video into PNG frames with the round glass and the ring drawn over them
 make phone-clear    # back to the real dash: ALWAYS do this when you are done
@@ -74,7 +74,7 @@ phone-host` writes the file (with `adb`) and `make phone-clear` removes it. The 
 `app/src/main/java/com/reau/app/service/LanTestDash.kt`, tested by `LanTestDashTest`.
 
 The file is read when REau is switched on, so a change of address (or `phone-clear`) takes effect the next time you
-touch Encender.
+touch Turn on.
 
 Without `make`, the same by hand:
 
@@ -121,7 +121,7 @@ Tips from trying it:
 - Changing the DPI, the margins or the side of the apps bar restarts Android Auto's session: wait 10 to 15 seconds before
   you look at the new picture.
 - To compare settings, change one at a time on the "Android Auto screen" page of the app, wait, and cut the frames; the page's
-  own preview also draws the glass and the ring (the "Máscara" button).
+  own preview also draws the glass and the ring (the "Mask" button).
 
 ## When something does not work
 
@@ -129,7 +129,7 @@ Tips from trying it:
 |---|---|
 | `make phone-host`: "adb sees no phone" | the cable or USB debugging; `adb devices` must list it as `device` |
 | The phone does nothing for `adb` taps; screenshots are black | it is locked; unlock it (never leave a PIN to a script) |
-| REau says "Transmitting" but `make dash` prints nothing | the phone is not writing to this computer: wrong `IP`, another network, client isolation, or the macOS firewall prompt was declined |
+| REau says "Streaming" but `make dash` prints nothing | the phone is not writing to this computer: wrong `IP`, another network, client isolation, or the macOS firewall prompt was declined |
 | REau stays waiting for Android Auto | the head unit server is off: touch ⋮ then "Start head unit server" in Android Auto's settings |
 | REau refuses to start, or never hears the dash | another REau, or another app of the dash, holds UDP 2002: stop it |
 | `make frames`: "has no video yet" | REau was not switched on against the fake dash; run `make phone-host`, then `make start` |

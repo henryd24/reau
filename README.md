@@ -60,6 +60,12 @@ that step by itself and to fit the Android Auto app menu.
 
 Both install side by side on the same phone, but they must not run at the same time (they compete for the dash).
 
+## Guides
+
+- [guides/himalayan-450.md](guides/himalayan-450.md): installing and setting up REau on a Himalayan 450, with the picture and joystick settings that worked best.
+- [guides/fork.md](guides/fork.md): how work is done in this repository (remote, branches, bringing changes from the original project).
+- [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md): trying changes without the bike, with a fake dash on the computer.
+
 ## Build
 
 With JDK 21 and the Android SDK installed:

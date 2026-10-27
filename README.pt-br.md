@@ -61,6 +61,12 @@ passo sozinho e encaixe o menu de apps do Android Auto.
 
 As duas instalam juntas no mesmo celular, mas não devem rodar ao mesmo tempo (disputam o painel).
 
+## Guias
+
+- [guides/himalayan-450.md](guides/himalayan-450.md) (em inglês; em espanhol: [guides/himalayan-450.es.md](guides/himalayan-450.es.md)): instalar e configurar o REau numa Himalayan 450.
+- [guides/fork.md](guides/fork.md) (em inglês): como se trabalha neste repositório.
+- [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md) (em inglês): testar mudanças sem a moto, com um painel falso no computador.
+
 ## Compilar
 
 Com o JDK 21 e o Android SDK instalados:

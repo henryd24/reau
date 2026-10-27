@@ -68,11 +68,11 @@ Las dos se instalan juntas en el mismo teléfono, pero no deben funcionar a la v
 Hay un acceso directo en el icono de la app y un bloque en los Ajustes rápidos ("Encender REau") que abren REau y encienden la
 proyección de una vez.
 
-## Guías en español
+## Guías
 
-- [guias/himalayan-450.md](guias/himalayan-450.md): instalar y poner a funcionar REau con una Himalayan 450, con los ajustes de imagen
+- [guides/himalayan-450.es.md](guides/himalayan-450.es.md): instalar y poner a funcionar REau con una Himalayan 450, con los ajustes de imagen
   y de joystick que mejor resultado dieron.
-- [guias/fork.md](guias/fork.md): cómo está montado este fork (ramas, remotos, cómo traer cambios del autor).
+- [guides/fork.es.md](guides/fork.es.md): cómo se trabaja en este repositorio (remoto, ramas, cómo traer cambios del proyecto original).
 - [scripts/emu/FAKE_DASH.es.md](scripts/emu/FAKE_DASH.es.md): probar cambios sin la moto, con un tablero falso en el computador.
 
 ## Compilación
