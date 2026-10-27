@@ -14,8 +14,19 @@ data class StatsOverlay(
     val x: Int = DEFAULT_X,
     val y: Int = DEFAULT_Y,
     val size: Int = DEFAULT_SIZE,
+    /** Also write the phone clock, with milliseconds, in the same box (to film the dash next to the phone and read the delay). */
+    val clock: Boolean = false,
 ) {
+    /** Whether anything is drawn: the numbers, the clock or both. */
+    val visible: Boolean get() = on || clock
+
     companion object {
+        private val CLOCK_FORMAT = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss.SSS", Locale.US)
+
+        /** The clock as the dash shows it: `14:31:15.482`, in the phone time zone. */
+        fun clockText(epochMs: Long, zone: java.time.ZoneId = java.time.ZoneId.systemDefault()): String =
+            CLOCK_FORMAT.format(java.time.Instant.ofEpochMilli(epochMs).atZone(zone))
+
         val X = 0..DashGlass.FRAME_W
         val Y = 0..DashGlass.FRAME_H
         val SIZE = 10..60
@@ -83,7 +94,14 @@ data class Reading(val fps: Double, val kbps: Double)
  * after it (the bitrate mode and the keyframe, of the stream to the dash); and, last, the [detail] (the average frame
  * size and, when REau has it, the speed).
  */
-data class StatsText(val numbers: String, val label: String, val extra: String = "", val detail: String = "")
+data class StatsText(
+    val numbers: String,
+    val label: String,
+    val extra: String = "",
+    val detail: String = "",
+    /** The phone clock, first line, when it is switched on; empty otherwise. */
+    val clock: String = "",
+)
 
 /**
  * Decides which numbers the text shows: Android Auto's own on the phone ("app") while

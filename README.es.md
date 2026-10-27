@@ -73,6 +73,7 @@ proyección de una vez.
 - [guides/himalayan-450.es.md](guides/himalayan-450.es.md): instalar y poner a funcionar REau con una Himalayan 450, con los ajustes de imagen
   y de joystick que mejor resultado dieron.
 - [guides/fork.es.md](guides/fork.es.md): cómo se trabaja en este repositorio (remoto, ramas, cómo traer cambios del proyecto original).
+- [guides/stream-latency.es.md](guides/stream-latency.es.md): probar otras frecuencias de video y medir el retraso con el reloj del teléfono en el tablero.
 - [scripts/emu/FAKE_DASH.es.md](scripts/emu/FAKE_DASH.es.md): probar cambios sin la moto, con un tablero falso en el computador.
 
 ## Compilación

@@ -253,7 +253,7 @@ class DashCompositor(private val log: (String) -> Unit) {
     fun setOverlayText(text: StatsText) = onGlThread(wait = false) {
         if (text == overlayText) return@onGlThread
         overlayText = text
-        if (overlay.on) rebuildOverlay()
+        if (overlay.on && !overlay.clock) rebuildOverlay()
     }
 
     /** Shows the "picture stuck" badge saying [text] on the dash's video from the next frame; null takes it off. */
@@ -273,10 +273,13 @@ class DashCompositor(private val log: (String) -> Unit) {
 
     private fun rebuildOverlay() {
         runCatching {
-            if (!overlay.on) {
+            if (!overlay.visible) {
                 gl.setOverlay(null)
             } else {
-                val picture = StatsOverlayInk.render(overlayText, overlay.size)
+                // The clock is read as the picture is made, so it is the moment this frame was composed; without the numbers' switch, only the clock.
+                val numbers = if (overlay.on) overlayText else StatsText("", "")
+                val text = if (overlay.clock) numbers.copy(clock = StatsOverlay.clockText(System.currentTimeMillis())) else numbers
+                val picture = StatsOverlayInk.render(text, overlay.size)
                 gl.setOverlay(picture)
                 picture.recycle()
             }
@@ -339,8 +342,9 @@ class DashCompositor(private val log: (String) -> Unit) {
     /** Draws the latched picture (or black) on the output and posts it with the next time of the video clock. */
     private fun emitFrame(repeat: Boolean) {
         val startNs = System.nanoTime()
+        if (overlay.clock) rebuildOverlay()
         gl.draw(window.takeIf { hasImage }, viewport)
-        if (overlay.on) gl.drawOverlay(overlay.x, overlay.y)
+        if (overlay.visible) gl.drawOverlay(overlay.x, overlay.y)
         if (staleBadge != null) gl.drawBadge()
 
         if (lastStampMs >= 0) ptsMs = DashLogic.nextVideoPts(ptsMs, sinceLastFrameMs, pace.clockSlowPercent)

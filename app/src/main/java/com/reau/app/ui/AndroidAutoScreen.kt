@@ -88,7 +88,7 @@ fun AndroidAutoScreen(
                 // Over the picture, drawing only: the finger still reaches the picture under it.
                 if (mask?.on == true) PanelMaskOverlay(mask, Modifier.matchParentSize().testTag("aa_screen_mask"))
                 // The stats text where it lands on the dash's frame, with the switch on; a sample of its numbers.
-                if (mask != null && stats?.on == true) StatsOverlayPreview(mask, stats, Modifier.matchParentSize().testTag("aa_screen_stats"))
+                if (mask != null && stats?.visible == true) StatsOverlayPreview(mask, stats, Modifier.matchParentSize().testTag("aa_screen_stats"))
             }
             TouchLine(touch)
             if (fit != null) {

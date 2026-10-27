@@ -78,5 +78,5 @@ object LiveTuning {
             before.dashRouteExtras != after.dashRouteExtras || before.dashWeather != after.dashWeather
 
     /** What a stream to the dash is made with. */
-    private val REauSettings.stream get() = listOf(fpsCeiling, clockSlowPercent, streamBitrateBps, bitrateMode, keyframeSec)
+    private val REauSettings.stream get() = listOf(fpsCeiling, reducedFps, clockSlowPercent, streamBitrateBps, bitrateMode, keyframeSec)
 }

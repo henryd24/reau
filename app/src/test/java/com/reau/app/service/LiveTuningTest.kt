@@ -37,6 +37,13 @@ class LiveTuningTest {
     }
 
     @Test
+    fun `the rates of the two profiles take a new stream, and the policy between them nothing`() {
+        assertEquals(setOf(Step.NEW_STREAM), LiveTuning.steps(before, before.copy(fpsCeiling = 6)))
+        assertEquals(setOf(Step.NEW_STREAM), LiveTuning.steps(before, before.copy(reducedFps = 4)))
+        assertEquals("it is read at every poll", emptySet<Step>(), LiveTuning.steps(before, before.copy(navProfileMode = com.reau.app.dash.NavProfileMode.OTIMISTA)))
+    }
+
+    @Test
     fun `the frame rate ceiling and the video clock take a new stream`() {
         assertEquals(setOf(Step.NEW_STREAM), LiveTuning.steps(before, before.copy(fpsCeiling = before.fpsCeiling + 2)))
         assertEquals(setOf(Step.NEW_STREAM), LiveTuning.steps(before, before.copy(clockSlowPercent = 5)))

@@ -87,4 +87,32 @@ class StatsOverlayTest {
             assertEquals(setOf(LiveTuning.Step.STATS_OVERLAY), LiveTuning.steps(before, changed))
         }
     }
+
+    @Test
+    fun `the clock is written with milliseconds in the given zone`() {
+        val utc = java.time.ZoneOffset.UTC
+        assertEquals("14:31:15.482", StatsOverlay.clockText(1_793_025_075_482L, utc))
+        assertEquals("00:00:00.007", StatsOverlay.clockText(7L, utc))
+        assertEquals("09:00:00.000", StatsOverlay.clockText(0L, java.time.ZoneOffset.ofHours(9)))
+    }
+
+    @Test
+    fun `the box is drawn with the numbers, the clock or both`() {
+        assertFalse(StatsOverlay().visible)
+        assertTrue(StatsOverlay(on = true).visible)
+        assertTrue(StatsOverlay(clock = true).visible)
+        assertTrue(StatsOverlay(on = true, clock = true).visible)
+        assertEquals("the clock is its own switch", false, REauSettings().overlay.clock)
+        assertEquals(true, REauSettings(clockOverlay = true).overlay.clock)
+    }
+
+    @Test
+    fun `switching the clock on or off reaches the compositor and is remembered`() {
+        val before = REauSettings()
+        val after = before.copy(clockOverlay = true)
+        assertEquals(setOf(LiveTuning.Step.STATS_OVERLAY), LiveTuning.steps(before, after))
+        val prefs = KeystoreBackedPrefsTest.FakePrefs()
+        SettingsStore(prefs).save(after)
+        assertEquals(true, SettingsStore(prefs).load().clockOverlay)
+    }
 }

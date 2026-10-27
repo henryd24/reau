@@ -74,6 +74,8 @@ data class REauSettings(
     val moveX: Int = 0,
     val moveY: Int = 0,
     val fpsCeiling: Int = DEFAULT_FPS_CEILING,
+    /** Profile 2 rate (the navigation profiles reduced tier); never above [fpsCeiling]. Its bitrate is [DashConfig.BPS_PER_FPS] a frame a second. */
+    val reducedFps: Int = DashConfig.PROFILE_REDUCED_FPS,
     /** The bitrate while the picture moves, half of it still; raised as needed so a higher rate keeps its bits per frame. */
     val streamBitrateBps: Int = DEFAULT_STREAM_BITRATE,
     val bitrateMode: BitrateMode = BitrateMode.CBR,
@@ -157,6 +159,8 @@ data class REauSettings(
     val statsX: Int = StatsOverlay.DEFAULT_X,
     val statsY: Int = StatsOverlay.DEFAULT_Y,
     val statsSize: Int = StatsOverlay.DEFAULT_SIZE,
+    /** The phone clock, with milliseconds, written on the dash video: to film it next to the phone and read the delay. */
+    val clockOverlay: Boolean = false,
     /**
      * The dash's heartbeat carries the phone's real battery, charging, GPS
      * and cell signal ([com.reau.app.service.PhoneStatusReader]) instead of the capture's 62 % and always-on GPS and
@@ -195,7 +199,7 @@ data class REauSettings(
     val webAudio: WebAudioMode = WebAudioMode.PHONE,
 ) {
     /** The stats text as the compositor takes it. */
-    val overlay: StatsOverlay get() = StatsOverlay(statsOverlay, statsX, statsY, statsSize)
+    val overlay: StatsOverlay get() = StatsOverlay(statsOverlay, statsX, statsY, statsSize, clockOverlay)
 
     /** The apps' fit (Waze, Google Maps, Spotify...), the fields of before. */
     val appsFit: FitParams get() = FitParams(fit, cropPercent, cropX, cropY, moveX, moveY)
@@ -303,20 +307,22 @@ data class REauSettings(
      * ([navProfileMode]).
      */
     fun sanitized(): REauSettings {
+        val fullFps = DashConfig.snapStreamFps(fpsCeiling).coerceAtMost(DashConfig.EXPERIMENT_MAX_FPS)
         val framed = copy(
             clockSlowPercent = 0,
             phoneTouch = true,
             density = density.coerceIn(DENSITY),
             marginW = marginW.coerceIn(0, AaVideo.WIDTH - MIN_PICTURE),
             marginH = marginH.coerceIn(0, AaVideo.HEIGHT - MIN_PICTURE),
-            navProfileMode = NavProfileMode.PESSIMISTA,
             maneuverData = true,
             clearAaFocus = true,
             aaNewProtocol = true,
             maneuverFpsProfile = true,
             speedFpsProfile = true,
-            fpsCeiling = DashConfig.PROFILE_FULL_FPS,
-            streamBitrateBps = DashConfig.PROFILE_FULL_BPS,
+            fpsCeiling = fullFps,
+            reducedFps = reducedFps.coerceIn(DashConfig.REDUCED_MIN_FPS, fullFps)
+                .let { it - (it - DashConfig.REDUCED_MIN_FPS) % DashConfig.STREAM_FPS_STEP },
+            streamBitrateBps = fullFps * DashConfig.BPS_PER_FPS,
             bitrateMode = BitrateMode.CBR,
             keyframeSec = DashConfig.PROFILE_KEYFRAME_SEC,
             logKeepDays = logKeepDays.takeIf { it in LOG_KEEP_DAYS } ?: DEFAULT_LOG_KEEP_DAYS,
@@ -484,6 +490,7 @@ class SettingsStore(private val prefs: SharedPreferences) {
             menuFit = menuFitOr(defaults.menuFit ?: defaults.appsFit, defaults.menuFit != null),
             menuFitKept = menuFitOr(defaults.menuFitKept, on = null) ?: defaults.menuFitKept,
             fpsCeiling = prefs.getInt(KEY_FPS, defaults.fpsCeiling),
+            reducedFps = prefs.getInt(KEY_REDUCED_FPS, defaults.reducedFps),
             streamBitrateBps = prefs.getInt(KEY_BITRATE, defaults.streamBitrateBps),
             bitrateMode = enumOr(prefs.getString(KEY_BITRATE_MODE, null), defaults.bitrateMode),
             keyframeSec = prefs.getInt(KEY_KEYFRAME, defaults.keyframeSec),
@@ -519,6 +526,7 @@ class SettingsStore(private val prefs: SharedPreferences) {
             railRight = prefs.getBoolean(KEY_RAIL_RIGHT, defaults.railRight),
             dashMask = prefs.getBoolean(KEY_DASH_MASK, defaults.dashMask),
             statsOverlay = prefs.getBoolean(KEY_STATS_OVERLAY, defaults.statsOverlay),
+            clockOverlay = prefs.getBoolean(KEY_CLOCK_OVERLAY, defaults.clockOverlay),
             statsX = prefs.getInt(KEY_STATS_X, defaults.statsX),
             statsY = prefs.getInt(KEY_STATS_Y, defaults.statsY),
             statsSize = prefs.getInt(KEY_STATS_SIZE, defaults.statsSize),
@@ -598,6 +606,8 @@ class SettingsStore(private val prefs: SharedPreferences) {
             putBoolean(KEY_RAIL_RIGHT, s.railRight)
             putBoolean(KEY_DASH_MASK, s.dashMask)
             putBoolean(KEY_STATS_OVERLAY, s.statsOverlay)
+            putBoolean(KEY_CLOCK_OVERLAY, s.clockOverlay)
+            putInt(KEY_REDUCED_FPS, s.reducedFps)
             putInt(KEY_STATS_X, s.statsX)
             putInt(KEY_STATS_Y, s.statsY)
             putInt(KEY_STATS_SIZE, s.statsSize)
@@ -644,6 +654,8 @@ class SettingsStore(private val prefs: SharedPreferences) {
         private const val KEY_MENU_MOVE_X = "menu_move_x"
         private const val KEY_MENU_MOVE_Y = "menu_move_y"
         private const val KEY_FPS = "fps_ceiling"
+        private const val KEY_REDUCED_FPS = "reduced_fps"
+        private const val KEY_CLOCK_OVERLAY = "clock_overlay"
         private const val KEY_BITRATE = "stream_bitrate"
         private const val KEY_BITRATE_MODE = "bitrate_mode"
         private const val KEY_KEYFRAME = "keyframe_sec"

@@ -16,7 +16,7 @@ import java.util.Locale
  * - **Bitrate.** The full bitrate while pictures keep coming ("the map changed recently" there is "Android Auto
  *   sent a new picture recently" here), half of it [MOTION_HOLD_MS] after the last one. The full bitrate is the
  *   rider's [bitrateCeilingBps], raised as needed so the rate keeps [DashLogic.MIN_BITS_PER_FRAME]. In the REDUCED
- *   tier (profile 2) it is [reducedBitrateBps] at most, whatever the picture does: the pace and the bits come down
+ *   tier (profile 2) it is the reduced bitrate at most, whatever the picture does: the pace and the bits come down
  *   together, and go back up together.
  * - **Keyframes.** Every [fixedKeyframeSec] seconds, or, with it at 0, as [AutoKeyframeController] decides.
  * - **Keyframes while still.** One every [DashLogic.IDLE_SYNC_EVERY_MS], when the encoder's own would be further
@@ -39,9 +39,12 @@ internal class StreamGovernor(
     private val windowMs: Long = WINDOW_MS,
     private val bitrateCeilingBps: Int = DashConfig.MAX_STREAM_BITRATE_BPS,
     private val fixedKeyframeSec: Int = DashConfig.KEYFRAME_INTERVAL_AUTO,
-    /** The bitrate of profile 2 (REDUCED), set live with its pace; profile 1's is [bitrateCeilingBps]. */
-    private val reducedBitrateBps: Int = DashConfig.PROFILE_REDUCED_BPS,
+    /** Profile 2 rate (REDUCED); null: half of profile 1. Never above it. Its bitrate follows, [DashConfig.BPS_PER_FPS] a frame a second. */
+    private val reducedFps: Int? = null,
 ) {
+    /** The bitrate of profile 2 (REDUCED), set live with its pace; profile 1's is [bitrateCeilingBps]. */
+    private val reducedBitrateBps: Int = reducedFps?.let { it * DashConfig.BPS_PER_FPS } ?: DashConfig.PROFILE_REDUCED_BPS
+
     /** What happened since the previous poll ([dashAcks] is the dash's running total). */
     data class Poll(
         val nowMs: Long,
@@ -172,7 +175,7 @@ internal class StreamGovernor(
      */
     private fun tierFps(tier: QualityTier): Int = when (tier) {
         QualityTier.FULL -> autoFps.ceiling
-        QualityTier.REDUCED -> snapNavFps(autoFps.ceiling / 2)
+        QualityTier.REDUCED -> snapNavFps(reducedFps?.coerceAtMost(autoFps.ceiling) ?: (autoFps.ceiling / 2))
     }
 
     private fun snapNavFps(fps: Int): Int {

@@ -65,6 +65,7 @@ As duas instalam juntas no mesmo celular, mas não devem rodar ao mesmo tempo (d
 
 - [guides/himalayan-450.md](guides/himalayan-450.md) (em inglês; em espanhol: [guides/himalayan-450.es.md](guides/himalayan-450.es.md)): instalar e configurar o REau numa Himalayan 450.
 - [guides/fork.md](guides/fork.md) (em inglês): como se trabalha neste repositório.
+- [guides/stream-latency.md](guides/stream-latency.md) (em inglês; em espanhol: [guides/stream-latency.es.md](guides/stream-latency.es.md)): testar outras taxas de vídeo e medir o atraso com o relógio do celular no painel.
 - [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md) (em inglês): testar mudanças sem a moto, com um painel falso no computador.
 
 ## Compilar

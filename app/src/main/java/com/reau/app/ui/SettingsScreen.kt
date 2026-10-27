@@ -88,7 +88,7 @@ fun SettingsScreen(
                     JoystickGroup(settings, change, onOpenJoystick)
                     // Its only row switches the server on by accessibility, which the Lite edition does not have.
                     if (com.reau.app.Edition.hasAccessibility) AndroidAutoGroup(settings, change, accessibility, actions.onOpenAccessibility)
-                    VideoProfilesGroup(settings)
+                    VideoProfilesGroup(settings, change)
                     CardGroup(settings, change, actions.onPickCardImage)
                     DebugGroup(settings, change, actions, say)
                 }
@@ -269,10 +269,10 @@ private fun AndroidAutoGroup(s: REauSettings, change: (REauSettings) -> Unit, ac
  * that choose between them. Everything in it is shown and locked.
  */
 @Composable
-private fun VideoProfilesGroup(s: REauSettings) {
+private fun VideoProfilesGroup(s: REauSettings, change: (REauSettings) -> Unit) {
     SettingsGroup(R.drawable.ic_ms_tune, stringResource(R.string.group_video_profiles), listOf(
-        { StreamProfileRows(s) },
-        { NavProfileRows() },
+        { StreamProfileRows(s, change) },
+        { NavProfileRows(s, change) },
     ), tag = "group_video_profiles")
 }
 

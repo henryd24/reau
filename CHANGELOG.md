@@ -18,6 +18,10 @@ Português (pt-BR): [CHANGELOG.pt-br.md](CHANGELOG.pt-br.md)
 - **Apps bar on the right**, a switch on the Android Auto screen page: Android Auto draws its side bar of apps on the right, away from the ring the dash draws over the lower left of the picture. It restarts Android Auto's session.
 - **A fake dash for developers** (`scripts/emu/`, see `FAKE_DASH.md`): a debug build can talk to a stand-in dash on the computer, to try the picture, the joystick and the settings without the bike. Release builds never read the setting that points to it.
 
+- **Video profile rates you can try**: Profile A (4 fps by default, up to 10) and profile B (2 fps by default) are now experimental steppers in Video profiles; the bitrate follows at 100 kbps for each frame a second. The defaults are unchanged.
+- **Which profile wins when the maneuver and the speed profiles disagree** is now a choice (Lower rate, the default, or Higher rate), applied at once.
+- **Phone clock on the video**, a switch on the Android Auto screen page: the phone's clock with milliseconds, in the stats text's box, on the dash and on that page's preview, to film both together and read the delay (`guides/stream-latency.md`).
+
 ### Changed
 - In the **Lite** edition REau opens Android Auto's settings by itself once the projection is on and the head unit server is off, leaving two taps (⋮, then "Start head unit server").
 - The Gradle wrapper's jar is now the official one, and the distribution has a checksum.

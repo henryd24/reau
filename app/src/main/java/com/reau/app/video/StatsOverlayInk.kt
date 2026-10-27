@@ -41,8 +41,9 @@ object StatsOverlayInk {
 
     /** The numbers; the label with its extra; the detail when there is one: the last two smaller. */
     private fun lines(text: StatsText, size: Float): List<Pair<String, Float>> = listOfNotNull(
-        text.numbers to size,
-        (if (text.extra.isEmpty()) text.label else "${text.label}  ${text.extra}") to size * LABEL_SCALE,
+        text.clock.takeIf { it.isNotEmpty() }?.let { it to size },
+        text.numbers.takeIf { it.isNotEmpty() }?.let { it to size },
+        (if (text.extra.isEmpty()) text.label else "${text.label}  ${text.extra}").takeIf { it.isNotBlank() }?.let { it to size * LABEL_SCALE },
         text.detail.takeIf { it.isNotEmpty() }?.let { it to size * LABEL_SCALE },
     )
 
