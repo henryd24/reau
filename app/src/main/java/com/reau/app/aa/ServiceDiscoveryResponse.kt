@@ -71,7 +71,7 @@ class ServiceDiscoveryResponse(config: AaConfig) :
             headUnitModel = MODEL
             headUnitSoftwareBuild = SOFTWARE_BUILD
             headUnitSoftwareVersion = SOFTWARE_VERSION
-            driverPosition = Control.DriverPosition.DRIVER_POSITION_LEFT
+            driverPosition = if (config.railRight) Control.DriverPosition.DRIVER_POSITION_RIGHT else Control.DriverPosition.DRIVER_POSITION_LEFT
             canPlayNativeMediaDuringVr = false
             hideProjectedClock = false
             displayName = MAKE

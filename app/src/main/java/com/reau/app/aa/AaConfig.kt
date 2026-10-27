@@ -34,4 +34,6 @@ data class AaConfig(
     /** For the web server: announce the media and guidance sinks, so Android Auto sends those sounds to REau. */
     val audio: Boolean = false,
     val protocolMinor: Int = Messages.MINOR_DEFAULT,
+    /** Tell Android Auto the driver sits on the right: it then draws its side bar of apps on the right too. */
+    val railRight: Boolean = false,
 )

@@ -24,7 +24,7 @@ class SettingsInUseTest {
     @Test
     fun `the line of the default settings says the ones that change a ride, in the order of the settings`() {
         assertEquals(
-            "settings in use: density=${fields.getValue("density")} marginW=0 marginH=0 fit=CROP cropPercent=${fields.getValue("cropPercent")} " +
+            "settings in use: density=${fields.getValue("density")} marginW=0 marginH=0 railRight=false fit=CROP cropPercent=${fields.getValue("cropPercent")} " +
                 "fpsCeiling=${fields.getValue("fpsCeiling")} streamBitrateBps=${fields.getValue("streamBitrateBps")} bitrateMode=CBR " +
                 "keyframeSec=${fields.getValue("keyframeSec")} clockSlowPercent=0 " +
                 "recordVideo=false recordSessions=false cardImage=default mapTheme=AUTO maneuverData=true maneuverFpsProfile=true " +

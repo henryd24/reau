@@ -62,6 +62,7 @@ data class REauSettings(
     val density: Int = DEFAULT_DENSITY,
     val marginW: Int = 0,
     val marginH: Int = 0,
+    val railRight: Boolean = false,
     val fit: Fit = Fit.CROP,
     val cropPercent: Int = DEFAULT_CROP,
     /**
@@ -227,7 +228,7 @@ data class REauSettings(
 
     val aaConfig: AaConfig get() = AaConfig(
         density, AaMargins(marginW, marginH), navigation = maneuverData, touch = phoneTouch, audio = audioSinks,
-        media = dashMusic, phone = dashCaller,
+        media = dashMusic, phone = dashCaller, railRight = railRight,
         protocolMinor = if (aaNewProtocol) com.reau.app.aa.Messages.MINOR_NEWER else com.reau.app.aa.Messages.MINOR_DEFAULT,
     )
 
@@ -515,6 +516,7 @@ class SettingsStore(private val prefs: SharedPreferences) {
             },
             aaServerAuto = prefs.getBoolean(KEY_AA_SERVER_AUTO, defaults.aaServerAuto),
             clearAaFocus = prefs.getBoolean(KEY_CLEAR_AA_FOCUS, defaults.clearAaFocus),
+            railRight = prefs.getBoolean(KEY_RAIL_RIGHT, defaults.railRight),
             dashMask = prefs.getBoolean(KEY_DASH_MASK, defaults.dashMask),
             statsOverlay = prefs.getBoolean(KEY_STATS_OVERLAY, defaults.statsOverlay),
             statsX = prefs.getInt(KEY_STATS_X, defaults.statsX),
@@ -593,6 +595,7 @@ class SettingsStore(private val prefs: SharedPreferences) {
             remove(KEY_HIDE_RING_MEDIA)
             remove(KEY_RING_ALWAYS_OFF)
             putBoolean(KEY_CLEAR_AA_FOCUS, s.clearAaFocus)
+            putBoolean(KEY_RAIL_RIGHT, s.railRight)
             putBoolean(KEY_DASH_MASK, s.dashMask)
             putBoolean(KEY_STATS_OVERLAY, s.statsOverlay)
             putInt(KEY_STATS_X, s.statsX)
@@ -688,6 +691,7 @@ class SettingsStore(private val prefs: SharedPreferences) {
         private const val KEY_HIDE_RING_MEDIA = "hide_ring_media"
         private const val KEY_RING_ALWAYS_OFF = "ring_always_off"
         private const val KEY_CLEAR_AA_FOCUS = "clear_aa_focus"
+        private const val KEY_RAIL_RIGHT = "rail_right"
 
         fun open(context: Context): SettingsStore = SettingsStore(context.applicationContext.getSharedPreferences(FILE, Context.MODE_PRIVATE))
     }

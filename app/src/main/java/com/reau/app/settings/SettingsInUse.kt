@@ -12,7 +12,7 @@ package com.reau.app.settings
 object SettingsInUse {
     /** Written, by the field's name in [REauSettings]. */
     internal val LOGGED = setOf(
-        "density", "marginW", "marginH", "fit", "cropPercent",
+        "density", "marginW", "marginH", "railRight", "fit", "cropPercent",
         "fpsCeiling", "streamBitrateBps", "bitrateMode", "keyframeSec", "clockSlowPercent",
         "recordVideo", "recordSessions", "cardImage", "mapTheme",
         "maneuverData", "maneuverFpsProfile", "speedFpsProfile", "navProfileMode",

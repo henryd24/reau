@@ -551,4 +551,15 @@ class REauSettingsTest {
         val edited = on.copy(menuFit = menuOwn.copy(cropX = 10)).sanitized()
         assertEquals(listOf("menuFit.cropX: 133 -> 10"), on.changesTo(edited))
     }
+
+    @Test
+    fun `the apps bar on the right is off by default, kept, and tells Android Auto the driver sits on the right`() {
+        assertEquals(false, REauSettings().railRight)
+        assertEquals(false, REauSettings().aaConfig.railRight)
+        val prefs = KeystoreBackedPrefsTest.FakePrefs()
+        SettingsStore(prefs).save(REauSettings(railRight = true))
+        val back = SettingsStore(prefs).load()
+        assertEquals(true, back.railRight)
+        assertEquals(true, back.aaConfig.railRight)
+    }
 }

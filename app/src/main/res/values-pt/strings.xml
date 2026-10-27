@@ -487,6 +487,8 @@
     <!-- The redesign's "Tela do Android Auto". -->
     <string name="aa_screen_touch_short">Toque e arraste na imagem para usar o Android Auto. O painel segue recebendo.</string>
     <string name="mask_chip">Máscara</string>
+    <string name="rail_right_title">Botões de apps à direita</string>
+    <string name="rail_right_sub">O Android Auto desenha seus botões à direita, longe do círculo do painel. Reinicia o Android Auto.</string>
     <string name="density_title">DPI do Android Auto</string>
     <string name="density_hint">padrão 180</string>
     <string name="density_sub">Maior = letras e botões maiores. Um só para o menu e os apps; mudar reinicia a sessão.</string>

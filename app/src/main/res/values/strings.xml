@@ -496,6 +496,8 @@
     <!-- The redesign's "Tela do Android Auto". -->
     <string name="aa_screen_touch_short">Tap and drag on the picture to use Android Auto. The dash still receives it.</string>
     <string name="mask_chip">Mask</string>
+    <string name="rail_right_title">Apps bar on the right</string>
+    <string name="rail_right_sub">Android Auto draws its buttons on the right, away from the dash\'s ring. Restarts Android Auto.</string>
     <string name="density_title">Android Auto DPI</string>
     <string name="density_hint">default 180</string>
     <string name="density_sub">Larger = bigger text and buttons. One value for the menu and the apps; changing it restarts the session.</string>
