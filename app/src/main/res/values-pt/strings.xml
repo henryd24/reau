@@ -143,6 +143,8 @@
     <string name="joystick_title">Joystick do painel</string>
     <string name="joystick_intro">Escolha o que cada toque do joystick faz. Vale na hora, também com a projeção ligada.</string>
     <string name="joystick_calls">Ligações, nos dois modos: tocando, esquerda atende e direita ou centro recusam; em ligação, o centro desliga. Precisa da chave \"Atender ligação\".</string>
+    <string name="joystick_arrows">Usar as quatro setas</string>
+    <string name="joystick_arrows_note">Move o foco do Android Auto para cima, baixo, esquerda e direita. No modo mapa o de cima é do próprio painel, então só esquerda, direita e baixo; o menu de apps é um toque duplo em voltar.</string>
     <string name="joystick_reset">Voltar ao padrão</string>
     <string name="joystick_control_left">Pra esquerda</string>
     <string name="joystick_control_right">Pra direita</string>
@@ -152,6 +154,10 @@
     <string name="joystick_action_nothing">Nada</string>
     <string name="joystick_action_wheel_previous">Item anterior</string>
     <string name="joystick_action_wheel_next">Próximo item</string>
+    <string name="joystick_action_focus_up">Foco para cima</string>
+    <string name="joystick_action_focus_down">Foco para baixo</string>
+    <string name="joystick_action_focus_left">Foco para a esquerda</string>
+    <string name="joystick_action_focus_right">Foco para a direita</string>
     <string name="joystick_action_confirm">Confirmar</string>
     <string name="joystick_action_back">Voltar</string>
     <string name="joystick_action_home">Menu de apps</string>
@@ -481,6 +487,8 @@
     <!-- The redesign's "Tela do Android Auto". -->
     <string name="aa_screen_touch_short">Toque e arraste na imagem para usar o Android Auto. O painel segue recebendo.</string>
     <string name="mask_chip">Máscara</string>
+    <string name="rail_right_title">Botões de apps à direita</string>
+    <string name="rail_right_sub">O Android Auto desenha seus botões à direita, longe do círculo do painel. Reinicia o Android Auto.</string>
     <string name="density_title">DPI do Android Auto</string>
     <string name="density_hint">padrão 180</string>
     <string name="density_sub">Maior = letras e botões maiores. Um só para o menu e os apps; mudar reinicia a sessão.</string>

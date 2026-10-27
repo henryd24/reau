@@ -1,6 +1,6 @@
 # REau
 
-English (padrão): [README.md](README.md)
+English (padrão): [README.md](README.md) · Español: [README.es.md](README.es.md)
 
 Aplicativo Android que leva o **Android Auto do próprio celular** para o painel TFT da moto, pela rede Wi-Fi do
 painel, com a tela do celular apagada. O REau não desenha mapa nenhum: repete no painel o que o app de navegação
@@ -29,7 +29,7 @@ pela rede Wi-Fi do painel.
 - Manda também a música tocando, as chamadas e o clima, para os cartões do painel.
 - Usa o joystick do guidão para comandar o Android Auto (mapa, menu, música, chamadas): tocando, a esquerda atende e a
   direita ou o centro recusam; em ligação, o centro desliga e cima e baixo mudam o volume.
-- Fala português e inglês: segue o idioma do celular, e há um seletor nos Ajustes.
+- Fala português, inglês e espanhol: segue o idioma do celular, e há um seletor nos Ajustes.
 - Ajusta a qualidade do vídeo pela distância da próxima manobra e pela velocidade.
 - Opcional: mostra o Android Auto num navegador da rede local, protegido por PIN.
 - Guarda um registro de diagnóstico no armazenamento interno do app (ligado por padrão, com uma chave nos Ajustes), para
@@ -72,6 +72,9 @@ Com o JDK 21 e o Android SDK instalados:
 ```
 
 Os testes instrumentados (`app/src/androidTest`) rodam num emulador, contra um Android Auto falso e um painel falso.
+
+Para testar uma mudança sem a moto (a imagem, o joystick, os ajustes), um build de debug conversa com um painel falso no seu
+computador: veja [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md) (em inglês).
 
 Há um APK publicado na página de Releases do projeto; para compilar o seu em vez dele, o Gradle precisa achar o Android SDK (`ANDROID_HOME`, ou `sdk.dir` em `local.properties`), e o `assembleRelease` assina com a chave de debug do Android, porque o repositório não traz a chave de assinatura do projeto. As Releases oficiais são assinadas com essa chave, guardada fora do repositório; sem as variáveis de ambiente `REAU_KEYSTORE`, `REAU_KEY_ALIAS`, `REAU_KEYSTORE_PASSWORD` e `REAU_KEY_PASSWORD`, o release compilado localmente sai assinado com a chave de debug.
 

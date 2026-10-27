@@ -33,6 +33,7 @@ class LiveTuningTest {
         // The margins change the fit too, but Android Auto still draws with the old ones until its new session: the
         // fit waits for it (refitting at once put the crop out of place).
         assertEquals(setOf(Step.NEW_ANDROID_AUTO_SESSION), LiveTuning.steps(before, before.copy(marginW = 100)))
+        assertEquals(setOf(Step.NEW_ANDROID_AUTO_SESSION), LiveTuning.steps(before, before.copy(railRight = true)))
     }
 
     @Test

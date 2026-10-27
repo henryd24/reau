@@ -9,6 +9,19 @@ with no change visible to people who use the app are not listed).
 
 Português (pt-BR): [CHANGELOG.pt-br.md](CHANGELOG.pt-br.md)
 
+## [Unreleased]
+
+### Added
+- **Spanish**, as a third language of the app, in the settings' language selector (Automatic, Portuguese, English, Spanish). The terms of use and the project's website stay in Portuguese and English.
+- **Quick start**: a launcher shortcut and a Quick Settings tile ("Turn REau on") that open REau and switch the projection on at once.
+- **The four arrows on the joystick**: up, down, left and right move Android Auto's focus in two dimensions. A button on the Joystick page, "Use the four arrows", sets them in both of the dash's modes (the apps menu is then a double tap on back).
+- **Apps bar on the right**, a switch on the Android Auto screen page: Android Auto draws its side bar of apps on the right, away from the ring the dash draws over the lower left of the picture. It restarts Android Auto's session.
+- **A fake dash for developers** (`scripts/emu/`, see `FAKE_DASH.md`): a debug build can talk to a stand-in dash on the computer, to try the picture, the joystick and the settings without the bike. Release builds never read the setting that points to it.
+
+### Changed
+- In the **Lite** edition REau opens Android Auto's settings by itself once the projection is on and the head unit server is off, leaving two taps (⋮, then "Start head unit server").
+- The Gradle wrapper's jar is now the official one, and the distribution has a checksum.
+
 ## [0.1.0] - 2026-10-19
 
 ### Added

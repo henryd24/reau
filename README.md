@@ -1,6 +1,6 @@
 # REau
 
-Português (pt-BR): [README.pt-br.md](README.pt-br.md)
+Português (pt-BR): [README.pt-br.md](README.pt-br.md) · Español: [README.es.md](README.es.md)
 
 Android app that brings the **phone's own Android Auto** to the motorcycle's TFT dash, over the dash's Wi-Fi, with the
 phone screen off. REau draws no map of its own: it repeats on the dash what the navigation app (Waze, Google Maps)
@@ -28,7 +28,7 @@ in developer mode. It receives the video, fits the picture to the dash's screen 
 - Also sends the music that is playing, calls and the weather, for the dash's cards.
 - Uses the handlebar joystick to control Android Auto (map, menu, music, calls): while ringing, left answers and right or
   center decline; during a call, center hangs up and up and down change the volume.
-- Speaks Portuguese and English: it follows the phone's language, and the settings have a switch.
+- Speaks Portuguese, English and Spanish: it follows the phone's language, and the settings have a switch.
 - Adjusts the video quality by the distance to the next maneuver and by speed.
 - Optional: shows Android Auto in a browser on the local network, protected by a PIN.
 - Keeps a diagnostic log in the app's internal storage (on by default, with a switch in the settings), to analyze on the
@@ -71,6 +71,9 @@ With JDK 21 and the Android SDK installed:
 ```
 
 The instrumented tests (`app/src/androidTest`) run on an emulator, against a fake Android Auto and a fake dash.
+
+To try a change without the bike (the picture, the joystick, the settings), a debug build can talk to a fake dash on your
+computer: see [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md).
 
 An APK is published on the project's Releases page; to build your own instead, Gradle has to find the Android SDK (`ANDROID_HOME`, or `sdk.dir` in `local.properties`), and `assembleRelease` signs with Android's debug key, because the repository does not carry the project's signing key. The official Releases are signed with that key, kept outside the repository; without the environment variables `REAU_KEYSTORE`, `REAU_KEY_ALIAS`, `REAU_KEYSTORE_PASSWORD` and `REAU_KEY_PASSWORD`, a local release build comes out signed with the debug key.
 

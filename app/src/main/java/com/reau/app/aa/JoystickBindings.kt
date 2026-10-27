@@ -26,6 +26,10 @@ data class JoystickBindings(private val chosen: Map<Slot, Action> = emptyMap()) 
         NOTHING({ null }),
         WHEEL_PREVIOUS({ AaCommand.Scroll(-1) }),
         WHEEL_NEXT({ AaCommand.Scroll(1) }),
+        FOCUS_UP({ AaCommand.Key(ServiceDiscoveryResponse.KEY_UP) }),
+        FOCUS_DOWN({ AaCommand.Key(ServiceDiscoveryResponse.KEY_DOWN) }),
+        FOCUS_LEFT({ AaCommand.Key(ServiceDiscoveryResponse.KEY_LEFT) }),
+        FOCUS_RIGHT({ AaCommand.Key(ServiceDiscoveryResponse.KEY_RIGHT) }),
         CONFIRM({ AaCommand.Key(ServiceDiscoveryResponse.KEY_ENTER) }),
         BACK({ AaCommand.Key(ServiceDiscoveryResponse.KEY_BACK) }),
         HOME({ AaCommand.Key(ServiceDiscoveryResponse.KEY_HOME) }),
@@ -74,6 +78,23 @@ data class JoystickBindings(private val chosen: Map<Slot, Action> = emptyMap()) 
         )
 
         fun defaultOf(slot: Slot): Action = DEFAULTS[slot] ?: Action.NOTHING
+
+        /**
+         * The joystick as four arrows, to move Android Auto's focus in two dimensions: left, right and down in the map
+         * mode (up and the centre are the dash's own there), all four in the media mode with the centre confirming.
+         * Home is the double tap of back ([JoystickMap]).
+         */
+        val ARROWS: JoystickBindings = JoystickBindings(
+            mapOf(
+                Slot(Mode.MAP, Control.LEFT, Gesture.ONCE) to Action.FOCUS_LEFT,
+                Slot(Mode.MAP, Control.RIGHT, Gesture.ONCE) to Action.FOCUS_RIGHT,
+                Slot(Mode.MAP, Control.DOWN, Gesture.ONCE) to Action.FOCUS_DOWN,
+                Slot(Mode.MEDIA, Control.LEFT, Gesture.ONCE) to Action.FOCUS_LEFT,
+                Slot(Mode.MEDIA, Control.RIGHT, Gesture.ONCE) to Action.FOCUS_RIGHT,
+                Slot(Mode.MEDIA, Control.UP, Gesture.ONCE) to Action.FOCUS_UP,
+                Slot(Mode.MEDIA, Control.DOWN, Gesture.ONCE) to Action.FOCUS_DOWN,
+            ),
+        )
 
         /**
          * The controls the dash keeps for itself in its map mode: up is the dash's

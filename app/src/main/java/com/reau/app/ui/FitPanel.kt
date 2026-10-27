@@ -93,6 +93,12 @@ private fun FitBlocks(menuTab: Boolean, onMenuTab: (Boolean) -> Unit, s: REauSet
         Text(stringResource(R.string.density_sub), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
     Margins(s, change)
+    Card {
+        SwitchRow(
+            stringResource(R.string.rail_right_title), s.railRight, { change(s.copy(railRight = it)) }, "rail_right",
+            sub = stringResource(R.string.rail_right_sub),
+        )
+    }
     if (Edition.hasAccessibility) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             TabRail(
