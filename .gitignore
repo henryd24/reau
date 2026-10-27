@@ -40,3 +40,9 @@ __pycache__/
 *.p12
 *.pem
 *.pfx
+
+# The fake dash: its virtual environment, the video it records and the frames cut from it.
+/scripts/emu/.venv/
+/scripts/emu/fake_dash_out/
+/scripts/emu/fake_dash_frames/
+*.h264

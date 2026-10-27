@@ -72,6 +72,9 @@ With JDK 21 and the Android SDK installed:
 
 The instrumented tests (`app/src/androidTest`) run on an emulator, against a fake Android Auto and a fake dash.
 
+To try a change without the bike (the picture, the joystick, the settings), a debug build can talk to a fake dash on your
+computer: see [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md).
+
 An APK is published on the project's Releases page; to build your own instead, Gradle has to find the Android SDK (`ANDROID_HOME`, or `sdk.dir` in `local.properties`), and `assembleRelease` signs with Android's debug key, because the repository does not carry the project's signing key. The official Releases are signed with that key, kept outside the repository; without the environment variables `REAU_KEYSTORE`, `REAU_KEY_ALIAS`, `REAU_KEYSTORE_PASSWORD` and `REAU_KEY_PASSWORD`, a local release build comes out signed with the debug key.
 
 ## Privacy

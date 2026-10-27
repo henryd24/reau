@@ -4,7 +4,7 @@
 What it plays, from REau's own protocol code (dash/protocol, DashSession, DashAuth):
   - UDP :2000  the phone's control packets in; the dash's answers go to the phone's :2002.
   - UDP :5000  the phone's RTP H.264 (single NAL and FU-A); written as Annex-B to --out, so what the dash would
-               have shown can be looked at (`python3 fake_dash.py frames FILE`).
+               have shown can be looked at (`python3 fake_dash.py frames FILE`; see FAKE_DASH.md).
   - the key exchange (08 04 -> its RSA public key 07 00 / 07 03, 08 00 -> 07 01 01), a heartbeat so the phone's RX
     watchdog stays quiet, and the decode notices (09 06 55 per keyframe, 09 04 55 per other frame).
   - joystick presses (09 00 0001 XX): `python3 fake_dash.py button left` while the dash runs.
@@ -222,6 +222,9 @@ def local_ip() -> str:
 
 def phone_host(ip: str, app_id: str) -> None:
     """Writes the address into the debug app's own folder on the phone (adb); `--clear` goes back to the real dash."""
+    state = subprocess.run(["adb", "get-state"], capture_output=True, text=True)
+    if state.stdout.strip() != "device":
+        sys.exit("adb sees no phone: connect it with USB debugging on (adb devices) and unlock it")
     folder = f"/sdcard/Android/data/{app_id}/files"
     if ip == "clear":
         subprocess.run(["adb", "shell", "rm", "-f", f"{folder}/lan_dash_host.txt"], check=True)
@@ -232,12 +235,40 @@ def phone_host(ip: str, app_id: str) -> None:
     print(f"the phone talks to the test dash at {ip} (from the next time REau is switched on)")
 
 
-def frames(path: str, out_dir: str, fps: float) -> None:
+# What the rider sees of the dash's 526x300 frame (DashGlass, DashMask): the round glass cuts the top corners, and the dash
+# draws its own ring over the lower left. Measured on a real dash; keep in step with those two files.
+GLASS = (263, 263, 263)
+RING = (85, 233, 60)
+
+
+def dash_view(png: str, scale: int = 2) -> None:
+    """Draws the glass and the dash's ring over a 526x300 frame, in place (needs Pillow)."""
+    from PIL import Image, ImageDraw
+    frame = Image.open(png).convert("RGB")
+    frame = frame.resize((frame.width * scale, frame.height * scale), Image.NEAREST)
+    cx, cy, radius = (v * scale for v in GLASS)
+    mask = Image.new("L", frame.size, 0)
+    ImageDraw.Draw(mask).ellipse([cx - radius, cy - radius, cx + radius, cy + radius], fill=255)
+    out = Image.new("RGB", frame.size, (20, 20, 20))
+    out.paste(frame, (0, 0), mask)
+    rx, ry, rr = (v * scale for v in RING)
+    ImageDraw.Draw(out).ellipse([rx - rr, ry - rr, rx + rr, ry + rr], fill=(236, 230, 215), outline=(200, 160, 60), width=3 * scale)
+    out.save(png)
+
+
+def frames(path: str, out_dir: str, fps: float, mask: bool = False) -> None:
+    if not os.path.isfile(path) or os.path.getsize(path) < 1000:
+        sys.exit(f"{path} has no video yet: switch REau on with the phone pointed at this computer (see FAKE_DASH.md)")
     os.makedirs(out_dir, exist_ok=True)
-    subprocess.run(
+    done = subprocess.run(
         ["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-vf", f"fps={fps}", os.path.join(out_dir, "frame-%04d.png")],
-        check=True,
     )
+    if done.returncode != 0 or not any(n.endswith(".png") for n in os.listdir(out_dir)):
+        sys.exit("ffmpeg could not read any frame (is it installed? `brew install ffmpeg`)")
+    if mask:
+        for name in sorted(os.listdir(out_dir)):
+            if name.endswith(".png"):
+                dash_view(os.path.join(out_dir, name))
     print(f"frames in {out_dir}")
 
 
@@ -255,6 +286,7 @@ def main() -> int:
     fr.add_argument("file")
     fr.add_argument("--out", default="fake_dash_frames")
     fr.add_argument("--fps", type=float, default=1.0)
+    fr.add_argument("--mask", action="store_true", help="draw the round glass and the dash's ring over each frame (needs Pillow)")
     args = parser.parse_args()
     if args.cmd == "run":
         Dash(args.out).run()
@@ -263,7 +295,7 @@ def main() -> int:
     elif args.cmd == "phone-host":
         phone_host(args.ip or local_ip(), args.app) if args.ip != "clear" else phone_host("clear", args.app)
     else:
-        frames(args.file, args.out, args.fps)
+        frames(args.file, args.out, args.fps, args.mask)
     return 0
 
 

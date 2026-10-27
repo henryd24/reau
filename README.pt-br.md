@@ -73,6 +73,9 @@ Com o JDK 21 e o Android SDK instalados:
 
 Os testes instrumentados (`app/src/androidTest`) rodam num emulador, contra um Android Auto falso e um painel falso.
 
+Para testar uma mudança sem a moto (a imagem, o joystick, os ajustes), um build de debug conversa com um painel falso no seu
+computador: veja [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md) (em inglês).
+
 Há um APK publicado na página de Releases do projeto; para compilar o seu em vez dele, o Gradle precisa achar o Android SDK (`ANDROID_HOME`, ou `sdk.dir` em `local.properties`), e o `assembleRelease` assina com a chave de debug do Android, porque o repositório não traz a chave de assinatura do projeto. As Releases oficiais são assinadas com essa chave, guardada fora do repositório; sem as variáveis de ambiente `REAU_KEYSTORE`, `REAU_KEY_ALIAS`, `REAU_KEYSTORE_PASSWORD` e `REAU_KEY_PASSWORD`, o release compilado localmente sai assinado com a chave de debug.
 
 ## Privacidade
