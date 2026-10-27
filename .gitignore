@@ -46,3 +46,6 @@ __pycache__/
 /scripts/emu/fake_dash_out/
 /scripts/emu/fake_dash_frames/
 *.h264
+
+# Comparison sheets made from a phone: their maps show real places (streets, a home marker). Keep them local.
+/comparisons/
