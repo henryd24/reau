@@ -147,6 +147,7 @@ internal class LiveSides(
                 // Gemini (behind its switch): the voice from the headset or the phone.
                 val voice: (() -> VoiceSource)? = { PhoneVoice(context) { RideDiagnostics.log("aa", it) } }
                     .takeIf { settings.gemini }
+                val lan = LanTestDash.host(context)?.also { RideDiagnostics.warn("projection", "test dash on the local network: $it") }
                 return Setup(
                     aaConfig = settings.aaConfig,
                     aaOptions = AaReceiver.Options(
@@ -177,7 +178,8 @@ internal class LiveSides(
                         recordFrames = if (settings.recordVideo && folder != null) RECORD_FRAMES else 0,
                         recordDir = folder?.let { File(it, "video") },
                     ),
-                    linkUp = { ctx, scope -> phoneLinkUp(ctx, scope) },
+                    dashSocket = lan?.let(LanTestDash::socket) ?: { DashSocket(it) },
+                    linkUp = { ctx, scope -> if (lan != null) LanDashLinkUp() else phoneLinkUp(ctx, scope) },
                     mapping = settings.mappingFor(com.reau.app.aa.AaScreens.watch.screen.value),
                     online = { phoneOnline(context) },
                     // The theme read at each ask, so a change while running is followed.
