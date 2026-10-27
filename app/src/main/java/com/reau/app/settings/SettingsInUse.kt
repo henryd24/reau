@@ -15,7 +15,7 @@ object SettingsInUse {
         "density", "marginW", "marginH", "railRight", "fit", "cropPercent",
         "fpsCeiling", "streamBitrateBps", "bitrateMode", "keyframeSec", "clockSlowPercent",
         "recordVideo", "recordSessions", "cardImage", "mapTheme",
-        "maneuverData", "maneuverFpsProfile", "speedFpsProfile", "navProfileMode",
+        "maneuverData", "maneuverFpsProfile", "speedFpsProfile", "navProfileMode", "reducedFps", "clockOverlay",
         "autoJoinWifi", "detailedLog", "rideLog", "useLocation", "logKeepDays",
         "answerCalls", "phoneTouch", "dashMusic", "dashCaller", "gemini",
         "aaNewProtocol", "aaServerAuto", "clearAaFocus", "dashMask",

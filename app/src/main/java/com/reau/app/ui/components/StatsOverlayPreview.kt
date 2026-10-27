@@ -3,6 +3,7 @@ package com.reau.app.ui.components
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,6 +16,7 @@ import com.reau.app.video.DashGlass
 import com.reau.app.video.DashMask
 import com.reau.app.video.StatsOverlay
 import com.reau.app.video.StatsOverlayInk
+import com.reau.app.video.StatsText
 import kotlinx.coroutines.delay
 
 /**
@@ -25,10 +27,12 @@ import kotlinx.coroutines.delay
 @Composable
 fun StatsOverlayPreview(mask: AaScreenMask, stats: StatsOverlay, modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf(StatsOverlay.latest) }
-    LaunchedEffect(Unit) {
+    LaunchedEffect(stats.clock) {
         while (true) {
-            text = StatsOverlay.latest
-            delay(REFRESH_MS)
+            val numbers = if (stats.on) StatsOverlay.latest else StatsText("", "")
+            // With the clock on it is redrawn every frame of the screen: it is what the dash video is compared with.
+            text = if (stats.clock) numbers.copy(clock = StatsOverlay.clockText(System.currentTimeMillis())) else numbers
+            if (stats.clock) withFrameNanos { } else delay(REFRESH_MS)
         }
     }
     Canvas(modifier) {

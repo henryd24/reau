@@ -41,7 +41,7 @@ class ExperimentalMarkTest {
             .filter { ExperimentalMark.marks(text(it)) }
             .toSet()
         // The album cover works well, it is not experimental any more; only the real route stays red.
-        assertEquals(setOf("route_extras_sub"), marked)
+        assertEquals(setOf("profiles_fps_sub", "route_extras_sub"), marked)
     }
 
     @Test

@@ -304,6 +304,24 @@ class StreamGovernorTest {
     }
 
     @Test
+    fun `profile 2 takes the rate it was given, never above profile 1, and its bitrate follows`() {
+        fun reducedAt(ceiling: Int, reducedFps: Int?): StreamGovernor {
+            val g = StreamGovernor(
+                AutoFpsController.Plan(ceiling, ceiling, null), bitrateCeilingBps = ceiling * 100_000, reducedFps = reducedFps,
+            )
+            g.start(nowMs)
+            g.poll(drawn = 1)
+            g.keptAt(1200, drawn = 1)
+            g.poll(drawn = 1, navSample = maneuverSample(distance = 1450)) // REDUCED
+            return g
+        }
+        assertEquals("given 6 of 8", 6, reducedAt(8, 6).fps)
+        assertEquals("given nothing, half, as before", 4, reducedAt(8, null).fps)
+        assertEquals("never above profile 1", 6, reducedAt(6, 10).fps)
+        assertEquals("the encoder keeps profile 1's rate", 8, reducedAt(8, 6).encoderFps)
+    }
+
+    @Test
     fun `a tier change is only a pace change, however many times it flips`() {
         val g = started(startFps = 16, ceiling = 16)
         g.poll(navSample = maneuverSample(distance = 1200))

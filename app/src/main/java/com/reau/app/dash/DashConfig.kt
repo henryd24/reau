@@ -46,6 +46,11 @@ object DashConfig {
      * fewer frames, so a change of profile never replaces the encoder.
      */
     const val PROFILE_FULL_FPS = 4
+    /** Experimental: the fastest the rider may ask of profile 1; the bits per frame stay those of the proven 4 fps / 400 kbps. */
+    const val EXPERIMENT_MAX_FPS = 10
+    const val BPS_PER_FPS = 100_000
+    /** The slowest profile 2 goes (REau idle pace too). */
+    const val REDUCED_MIN_FPS = 2
     const val PROFILE_FULL_BPS = 400_000
     const val PROFILE_REDUCED_FPS = 2
     const val PROFILE_REDUCED_BPS = 200_000

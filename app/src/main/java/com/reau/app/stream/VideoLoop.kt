@@ -68,6 +68,8 @@ internal class VideoLoop(
     data class Settings(
         val startFps: Int = DashConfig.AUTO_FPS_START,
         val ceilingFps: Int = DashConfig.AUTO_FPS_CEILING,
+        /** Profile 2 rate; null: half of the ceiling, as it was before this was a choice. */
+        val reducedFps: Int? = null,
         val clockSlowPercent: Int = 0,
         val bitrateBps: Int = DashConfig.MAX_STREAM_BITRATE_BPS,
         val bitrateMode: BitrateMode? = null,
@@ -97,7 +99,10 @@ internal class VideoLoop(
         val ceiling = ThermalCeiling.capFor(status, settings.ceilingFps)
         if (ceiling < DashConfig.snapStreamFps(settings.ceilingFps)) logThermal(status)
         val plan = AutoFpsController.plan(settings.startFps, null, null, ceiling)
-        val g = StreamGovernor(plan, settings.clockSlowPercent, settings.windowMs, settings.bitrateBps, settings.keyframeSec)
+        val g = StreamGovernor(
+            plan, settings.clockSlowPercent, settings.windowMs, settings.bitrateBps, settings.keyframeSec,
+            reducedFps = settings.reducedFps,
+        )
         val rec = settings.recordDir?.takeIf { settings.recordFrames > 0 }?.let {
             H264Recorder(it, settings.recordFrames, H264Recorder.nameFor(System.currentTimeMillis()), log)
         }

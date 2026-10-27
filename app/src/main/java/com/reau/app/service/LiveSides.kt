@@ -171,6 +171,7 @@ internal class LiveSides(
                     ),
                     video = VideoLoop.Settings(
                         ceilingFps = settings.fpsCeiling,
+                        reducedFps = settings.reducedFps,
                         clockSlowPercent = settings.clockSlowPercent,
                         bitrateBps = settings.streamBitrateBps,
                         bitrateMode = settings.bitrateMode,
@@ -698,7 +699,7 @@ internal class LiveSides(
         /** The pace: the stream to the dash starts again with it (a keyframe first), the dash staying connected. */
         fun newStream(settings: REauSettings) {
             videoSettings = videoSettings.copy(
-                ceilingFps = settings.fpsCeiling, clockSlowPercent = settings.clockSlowPercent,
+                ceilingFps = settings.fpsCeiling, reducedFps = settings.reducedFps, clockSlowPercent = settings.clockSlowPercent,
                 bitrateBps = settings.streamBitrateBps, bitrateMode = settings.bitrateMode, keyframeSec = settings.keyframeSec,
             )
             val running = loop ?: return

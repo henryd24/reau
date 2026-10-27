@@ -19,6 +19,10 @@ aparecem).
 - **Barra de apps à direita**, uma chave na tela do Android Auto: o Android Auto desenha sua barra lateral de apps à direita, longe do círculo que o painel desenha sobre a parte de baixo à esquerda da imagem. Reinicia a sessão do Android Auto.
 - **Um painel falso para quem desenvolve** (`scripts/emu/`, veja `FAKE_DASH.md`): um build de debug conversa com um painel de mentira no computador, para testar a imagem, o joystick e os ajustes sem a moto. Os builds de release nunca leem o ajuste que aponta para ele.
 
+- **Taxas dos perfis de vídeo para testar**: o perfil A (4 fps por padrão, até 10) e o perfil B (2 fps por padrão) agora são ajustes experimentais em Perfis de vídeo; o bitrate acompanha, 100 kbps para cada quadro por segundo. Os padrões não mudam.
+- **Qual perfil vence quando o de manobra e o de velocidade discordam** agora é uma escolha (Taxa menor, a padrão, ou Taxa maior), aplicada na hora.
+- **Relógio do celular no vídeo**, uma chave na tela do Android Auto: o relógio do celular com milésimos, na caixa do texto de estatísticas, no painel e na prévia dessa tela, para filmar os dois juntos e ler o atraso (`guides/stream-latency.md`).
+
 ### Alterado
 - Na edição **Lite**, o REau abre sozinho os ajustes do Android Auto quando a projeção está ligada e o servidor de unidade principal desligado, sobrando dois toques (⋮ e "Iniciar servidor de unidade principal").
 - O jar do Gradle wrapper agora é o oficial, e a distribuição tem checksum.

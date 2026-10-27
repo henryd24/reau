@@ -142,7 +142,12 @@ private fun StatsSection(s: REauSettings, change: (REauSettings) -> Unit) {
                 stringResource(R.string.stats_title), s.statsOverlay, { change(s.copy(statsOverlay = it)) }, "stats_overlay",
                 info = Info(stringResource(R.string.stats_title), stringResource(R.string.stats_overlay)),
             )
-            if (s.statsOverlay) {
+            HorizontalDivider(thickness = 1.dp, color = hairline(0.14f, 0.6f))
+            SwitchRow(
+                stringResource(R.string.clock_overlay_title), s.clockOverlay, { change(s.copy(clockOverlay = it)) }, "clock_overlay",
+                info = Info(stringResource(R.string.clock_overlay_title), stringResource(R.string.clock_overlay_info)),
+            )
+            if (s.statsOverlay || s.clockOverlay) {
                 HorizontalDivider(thickness = 1.dp, color = hairline(0.14f, 0.6f))
                 StatsSteps(s, change)
             }

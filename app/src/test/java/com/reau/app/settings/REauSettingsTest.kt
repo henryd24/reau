@@ -98,7 +98,7 @@ class REauSettingsTest {
         assertEquals(0, wild.marginW)
         assertEquals("at least 16 px of picture left", 480 - 16, wild.marginH)
         assertEquals(20, wild.cropPercent)
-        assertEquals("fixed: profile 1 is 4 fps (FixedProfilesTest)", 4, wild.fpsCeiling)
+        assertEquals("at most 10 fps (FixedProfilesTest)", 10, wild.fpsCeiling)
         assertEquals("not one of the clock options", 0, wild.clockSlowPercent)
         assertEquals(-150 to 150, wild.moveX to wild.moveY)
 
@@ -312,7 +312,7 @@ class REauSettingsTest {
         val s = SettingsStore(prefs).load()
         assertEquals(80, s.density)
         assertEquals("an unknown fit is read as the default", REauSettings().fit, s.fit)
-        assertEquals("the stream's four values are fixed (FixedProfilesTest)", listOf(4, 400_000, 1), listOf(s.fpsCeiling, s.streamBitrateBps, s.keyframeSec))
+        assertEquals("the stream's values are kept within what is offered (FixedProfilesTest)", listOf(10, 1_000_000, 1), listOf(s.fpsCeiling, s.streamBitrateBps, s.keyframeSec))
     }
 
     @Test

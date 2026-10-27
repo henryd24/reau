@@ -64,6 +64,7 @@ Both install side by side on the same phone, but they must not run at the same t
 
 - [guides/himalayan-450.md](guides/himalayan-450.md): installing and setting up REau on a Himalayan 450, with the picture and joystick settings that worked best.
 - [guides/fork.md](guides/fork.md): how work is done in this repository (remote, branches, bringing changes from the original project).
+- [guides/stream-latency.md](guides/stream-latency.md): trying other stream rates and measuring the delay with the phone's clock on the dash.
 - [scripts/emu/FAKE_DASH.md](scripts/emu/FAKE_DASH.md): trying changes without the bike, with a fake dash on the computer.
 
 ## Build
