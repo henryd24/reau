@@ -1,5 +1,7 @@
 # Trying REau without the bike: the fake dash
 
+Español: [FAKE_DASH.es.md](FAKE_DASH.es.md)
+
 The Tripper dash is on the motorcycle, and REau only talks to it over the dash's own Wi-Fi. `fake_dash.py` plays the
 dash on your computer, and a **debug build** of REau can be pointed at it, so you can change the picture, the joystick
 or the settings and see the result without going to the bike.

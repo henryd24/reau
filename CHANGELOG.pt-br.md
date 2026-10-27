@@ -10,6 +10,19 @@ de debug acrescentam a data e a hora da compilação depois de `-dev+` (`0.1.0-d
 dela como histórico do projeto, cada um reunindo o que mudou naquele dia (dias sem mudança visível para quem usa o app não
 aparecem).
 
+## [Não publicado]
+
+### Adicionado
+- **Espanhol**, como terceiro idioma do app, no seletor de idioma dos Ajustes (Automático, Português, Inglês, Espanhol). Os termos de uso e o site do projeto continuam em português e inglês.
+- **Início rápido**: um atalho do ícone do app e um bloco das Configurações rápidas ("Ligar o REau") que abrem o REau e ligam a projeção na hora.
+- **As quatro setas no joystick**: cima, baixo, esquerda e direita movem o foco do Android Auto em duas dimensões. Um botão na página do Joystick, "Usar as quatro setas", as aplica nos dois modos do painel (o menu de apps passa a ser um toque duplo em voltar).
+- **Barra de apps à direita**, uma chave na tela do Android Auto: o Android Auto desenha sua barra lateral de apps à direita, longe do círculo que o painel desenha sobre a parte de baixo à esquerda da imagem. Reinicia a sessão do Android Auto.
+- **Um painel falso para quem desenvolve** (`scripts/emu/`, veja `FAKE_DASH.md`): um build de debug conversa com um painel de mentira no computador, para testar a imagem, o joystick e os ajustes sem a moto. Os builds de release nunca leem o ajuste que aponta para ele.
+
+### Alterado
+- Na edição **Lite**, o REau abre sozinho os ajustes do Android Auto quando a projeção está ligada e o servidor de unidade principal desligado, sobrando dois toques (⋮ e "Iniciar servidor de unidade principal").
+- O jar do Gradle wrapper agora é o oficial, e a distribuição tem checksum.
+
 ## [0.1.0] - 2026-10-19
 
 ### Adicionado

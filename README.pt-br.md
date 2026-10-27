@@ -1,6 +1,6 @@
 # REau
 
-English (padrão): [README.md](README.md)
+English (padrão): [README.md](README.md) · Español: [README.es.md](README.es.md)
 
 Aplicativo Android que leva o **Android Auto do próprio celular** para o painel TFT da moto, pela rede Wi-Fi do
 painel, com a tela do celular apagada. O REau não desenha mapa nenhum: repete no painel o que o app de navegação
@@ -29,7 +29,7 @@ pela rede Wi-Fi do painel.
 - Manda também a música tocando, as chamadas e o clima, para os cartões do painel.
 - Usa o joystick do guidão para comandar o Android Auto (mapa, menu, música, chamadas): tocando, a esquerda atende e a
   direita ou o centro recusam; em ligação, o centro desliga e cima e baixo mudam o volume.
-- Fala português e inglês: segue o idioma do celular, e há um seletor nos Ajustes.
+- Fala português, inglês e espanhol: segue o idioma do celular, e há um seletor nos Ajustes.
 - Ajusta a qualidade do vídeo pela distância da próxima manobra e pela velocidade.
 - Opcional: mostra o Android Auto num navegador da rede local, protegido por PIN.
 - Guarda um registro de diagnóstico no armazenamento interno do app (ligado por padrão, com uma chave nos Ajustes), para

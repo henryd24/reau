@@ -1,6 +1,6 @@
 # REau
 
-Português (pt-BR): [README.pt-br.md](README.pt-br.md)
+Português (pt-BR): [README.pt-br.md](README.pt-br.md) · Español: [README.es.md](README.es.md)
 
 Android app that brings the **phone's own Android Auto** to the motorcycle's TFT dash, over the dash's Wi-Fi, with the
 phone screen off. REau draws no map of its own: it repeats on the dash what the navigation app (Waze, Google Maps)
@@ -28,7 +28,7 @@ in developer mode. It receives the video, fits the picture to the dash's screen 
 - Also sends the music that is playing, calls and the weather, for the dash's cards.
 - Uses the handlebar joystick to control Android Auto (map, menu, music, calls): while ringing, left answers and right or
   center decline; during a call, center hangs up and up and down change the volume.
-- Speaks Portuguese and English: it follows the phone's language, and the settings have a switch.
+- Speaks Portuguese, English and Spanish: it follows the phone's language, and the settings have a switch.
 - Adjusts the video quality by the distance to the next maneuver and by speed.
 - Optional: shows Android Auto in a browser on the local network, protected by a PIN.
 - Keeps a diagnostic log in the app's internal storage (on by default, with a switch in the settings), to analyze on the
