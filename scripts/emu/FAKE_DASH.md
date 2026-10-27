@@ -107,10 +107,11 @@ seconds, and draws over each:
 - the **dash's own ring**, 120 px across at the lower left, which covers part of the picture (`DashMask`).
 
 Both are the numbers measured on a real dash, copied into `fake_dash.py` (`GLASS`, `RING`); if they change in the app, change
-them there too. For the whole stream as one sheet: `ffmpeg -i FILE -vf "fps=1/3,scale=263:150,tile=6x6" sheet.png`.
+them there too. For the whole stream as one sheet: `ffmpeg -framerate 4 -i FILE -vf "fps=1/3,scale=263:150,tile=6x6" sheet.png`.
 
 Tips from trying it:
 
+- A raw `.h264` file has no clock: tell ffmpeg the real rate (`-framerate 4`, as `make frames` does) or `fps=` counts the wrong seconds.
 - Decode from the start (as `make frames` does). Seeking near the end of the file (`-sseof`) lands on a frame without
   its parameters and gives a black or stale picture.
 - An `error while decoding MB` or `cbp too large` line from ffmpeg at the very start is harmless: it is the first frame.

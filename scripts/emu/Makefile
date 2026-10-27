@@ -18,7 +18,7 @@ B   ?= left
 ROOT := $(abspath ../..)
 VENV := .venv
 PY := $(VENV)/bin/python3
-FAKE := $(PY) fake_dash.py
+FAKE := $(PY) -u fake_dash.py
 
 .PHONY: setup install dash phone-host phone-clear start button frames test help
 

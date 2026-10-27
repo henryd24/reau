@@ -237,6 +237,8 @@ def phone_host(ip: str, app_id: str) -> None:
 
 # What the rider sees of the dash's 526x300 frame (DashGlass, DashMask): the round glass cuts the top corners, and the dash
 # draws its own ring over the lower left. Measured on a real dash; keep in step with those two files.
+# REau sends 4 frames a second; a raw H.264 file has no clock, so ffmpeg is told.
+STREAM_FPS = 4
 GLASS = (263, 263, 263)
 RING = (85, 233, 60)
 
@@ -261,7 +263,7 @@ def frames(path: str, out_dir: str, fps: float, mask: bool = False) -> None:
         sys.exit(f"{path} has no video yet: switch REau on with the phone pointed at this computer (see FAKE_DASH.md)")
     os.makedirs(out_dir, exist_ok=True)
     done = subprocess.run(
-        ["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-vf", f"fps={fps}", os.path.join(out_dir, "frame-%04d.png")],
+        ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(STREAM_FPS), "-i", path, "-vf", f"fps={fps}", os.path.join(out_dir, "frame-%04d.png")],
     )
     if done.returncode != 0 or not any(n.endswith(".png") for n in os.listdir(out_dir)):
         sys.exit("ffmpeg could not read any frame (is it installed? `brew install ffmpeg`)")
