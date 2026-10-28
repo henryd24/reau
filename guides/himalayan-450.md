@@ -75,8 +75,24 @@ dimensions, and the centre as **Confirm**. With that:
 - **Back:** one tap on Back.
 - **In the dash's map mode**, up belongs to the dash (it asks whether to leave the navigation) and the centre switches to media; so
   there only left, right and down are available.
-- **Careful with "Exit":** when the apps menu opens, the first focus is on **Exit**. Pressing Confirm right then closes Android Auto
-  (REau opens it again within a second, but the route on screen is lost). Move the focus before confirming.
+- **"Exit" cannot be reached by accident:** when the apps menu opens, the first focus is on **Exit**. If Confirm lands there, Android
+  Auto asks to leave and REau refuses (for two seconds after a Confirm from the joystick), so the session stays up. The picture goes
+  blank, though: press Confirm again on the apps button (it keeps the focus) to bring the menu back and pick an app. Leaving Android
+  Auto on purpose is done on the phone's own screen.
+
+**Go from app to app** (a second button on the same page) is meant for a trip such as navigation, Spotify and back, with the dash's
+media mode (left and right are the previous and next item, Confirm in the centre):
+
+![The five steps: navigation, Spotify and back](img/apps-steps.png)
+
+1. From the map, **left** once: the focus appears on the apps button. **Left** twice more reaches Spotify's icon (the microphone is
+   in between); **Confirm** opens it.
+2. In Spotify, left and right move between the cards; **Confirm** opens a playlist or plays a song; **Back** goes one step back.
+3. To leave Spotify, **up** (the left arrow) takes the focus out to the side bar, on Spotify's icon; **left** once more reaches
+   Waze's; **Confirm** brings the map back.
+
+In the dash's map mode, down plays the part of up. This was tried on the fake dash with Waze and Spotify; the bike's own joystick
+is still to be confirmed. Avoid the apps menu (two quick Backs): its first focus is on Exit.
 
 "Reset to default" on the same page goes back to the previous joystick.
 

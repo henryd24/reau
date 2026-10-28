@@ -146,6 +146,8 @@
     <string name="joystick_calls">Calls, in both modes: while ringing, left answers and right or center declines; during a call, center hangs up. Needs the \"Answer calls\" switch.</string>
     <string name="joystick_arrows">Use the four arrows</string>
     <string name="joystick_arrows_note">Moves Android Auto\'s focus up, down, left and right. In the map mode up is the dash\'s own, so only left, right and down; the apps menu is a double tap on back.</string>
+    <string name="joystick_apps">Go from app to app</string>
+    <string name="joystick_apps_note">The sides run along Android Auto\'s items, including the side bar of apps; one more control (up, or down in the map mode) takes the focus from inside an app out to the bar. Confirm opens the app.</string>
     <string name="joystick_reset">Reset to default</string>
     <string name="joystick_control_left">Left</string>
     <string name="joystick_control_right">Right</string>

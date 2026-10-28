@@ -46,7 +46,10 @@ internal class AapControlMedia(
             Media.MsgType.MEDIA_MESSAGE_VIDEO_FOCUS_REQUEST_VALUE -> {
                 val focusRequest = message.parse(Media.VideoFocusRequestNotification.newBuilder()).build()
                 AaLog.i("RX: Video Focus Request - mode: %s, reason: %s", focusRequest.mode, focusRequest.reason)
-                if (focusRequest.mode == Media.VideoFocusMode.VIDEO_FOCUS_NATIVE) {
+                if (focusRequest.mode == Media.VideoFocusMode.VIDEO_FOCUS_NATIVE && aapTransport.exitGuard.isSlip(android.os.SystemClock.elapsedRealtime())) {
+                    AaLog.i("Video Focus NATIVE right after the joystick's select: taken as a slip onto Exit, refused.")
+                    aapTransport.send(VideoFocusEvent(gain = true, unsolicited = false))
+                } else if (focusRequest.mode == Media.VideoFocusMode.VIDEO_FOCUS_NATIVE) {
                     AaLog.i("Video Focus NATIVE received. User likely clicked Exit. Stopping transport.")
                     aapTransport.wasUserExit = true
                     aapTransport.stop()

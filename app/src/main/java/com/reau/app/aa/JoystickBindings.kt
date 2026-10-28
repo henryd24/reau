@@ -97,6 +97,21 @@ data class JoystickBindings(private val chosen: Map<Slot, Action> = emptyMap()) 
         )
 
         /**
+         * The joystick to go from app to app: the sides are the wheel (next and previous item, which runs along the side
+         * bar of apps), and one more control is the left arrow, which takes the focus from inside an app out to the side
+         * bar (the wheel never leaves the app by itself). Up in the media mode and down in the map mode (up is the dash's
+         * own there); down in the media mode is the right arrow, back into the app. Home is not used: it opens the apps
+         * menu with its focus on "Exit".
+         */
+        val APPS: JoystickBindings = JoystickBindings(
+            mapOf(
+                Slot(Mode.MEDIA, Control.UP, Gesture.ONCE) to Action.FOCUS_LEFT,
+                Slot(Mode.MEDIA, Control.DOWN, Gesture.ONCE) to Action.FOCUS_RIGHT,
+                Slot(Mode.MAP, Control.DOWN, Gesture.ONCE) to Action.FOCUS_LEFT,
+            ),
+        )
+
+        /**
          * The controls the dash keeps for itself in its map mode: up is the dash's
          * own back and the centre puts it in the media mode. They take no action, whatever was saved for them.
          */

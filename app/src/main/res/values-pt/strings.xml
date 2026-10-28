@@ -145,6 +145,8 @@
     <string name="joystick_calls">Ligações, nos dois modos: tocando, esquerda atende e direita ou centro recusam; em ligação, o centro desliga. Precisa da chave \"Atender ligação\".</string>
     <string name="joystick_arrows">Usar as quatro setas</string>
     <string name="joystick_arrows_note">Move o foco do Android Auto para cima, baixo, esquerda e direita. No modo mapa o de cima é do próprio painel, então só esquerda, direita e baixo; o menu de apps é um toque duplo em voltar.</string>
+    <string name="joystick_apps">Passar de app em app</string>
+    <string name="joystick_apps_note">Os lados percorrem os itens do Android Auto, inclusive a barra de apps; outro controle (cima, ou baixo no modo mapa) tira o foco de dentro de um app para a barra. Confirmar abre o app.</string>
     <string name="joystick_reset">Voltar ao padrão</string>
     <string name="joystick_control_left">Pra esquerda</string>
     <string name="joystick_control_right">Pra direita</string>

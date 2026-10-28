@@ -23,7 +23,10 @@ aparecem).
 - **Qual perfil vence quando o de manobra e o de velocidade discordam** agora é uma escolha (Taxa menor, a padrão, ou Taxa maior), aplicada na hora.
 - **Relógio do celular no vídeo**, uma chave na tela do Android Auto: o relógio do celular com milésimos, na caixa do texto de estatísticas, no painel e na prévia dessa tela, para filmar os dois juntos e ler o atraso (`guides/stream-latency.md`).
 
+- **Passar de app em app com o joystick**, um botão na página do Joystick: os lados percorrem os itens do Android Auto (a roda, que inclui a barra de apps) e outro controle tira o foco de dentro de um app para a barra, então dá para ir da navegação ao Spotify e voltar sem o celular.
+
 ### Alterado
+- **O joystick não fecha mais o Android Auto por acidente**: um pedido para sair que chega até dois segundos depois de um Confirmar do joystick (o primeiro foco do menu de apps é "Sair") é recusado e a sessão continua; sair de propósito se faz no celular.
 - Na edição **Lite**, o REau abre sozinho os ajustes do Android Auto quando a projeção está ligada e o servidor de unidade principal desligado, sobrando dois toques (⋮ e "Iniciar servidor de unidade principal").
 - O jar do Gradle wrapper agora é o oficial, e a distribuição tem checksum.
 

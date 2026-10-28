@@ -22,7 +22,10 @@ Português (pt-BR): [CHANGELOG.pt-br.md](CHANGELOG.pt-br.md)
 - **Which profile wins when the maneuver and the speed profiles disagree** is now a choice (Lower rate, the default, or Higher rate), applied at once.
 - **Phone clock on the video**, a switch on the Android Auto screen page: the phone's clock with milliseconds, in the stats text's box, on the dash and on that page's preview, to film both together and read the delay (`guides/stream-latency.md`).
 
+- **Go from app to app with the joystick**, a button on the Joystick page: the sides run along Android Auto's items (the wheel, which includes the side bar of apps) and one more control takes the focus out of an app to the bar, so navigation, Spotify and back is possible without the phone.
+
 ### Changed
+- **The joystick no longer closes Android Auto by accident**: a request to leave that comes within two seconds of a Confirm from the joystick (the apps menu's first focus is "Exit") is refused and the session stays up; leaving on purpose is done on the phone.
 - In the **Lite** edition REau opens Android Auto's settings by itself once the projection is on and the head unit server is off, leaving two taps (⋮, then "Start head unit server").
 - The Gradle wrapper's jar is now the official one, and the distribution has a checksum.
 

@@ -145,6 +145,8 @@
     <string name="joystick_calls">Llamadas, en los dos modos: mientras suena, la izquierda contesta y la derecha o el centro rechaza; durante una llamada, el centro cuelga. Necesita el interruptor \"Contestar llamadas\".</string>
     <string name="joystick_arrows">Usar las cuatro flechas</string>
     <string name="joystick_arrows_note">Mueve el foco de Android Auto arriba, abajo, izquierda y derecha. En el modo mapa arriba es del tablero, así que solo izquierda, derecha y abajo; el menú de apps es un doble toque en atrás.</string>
+    <string name="joystick_apps">Pasar de app en app</string>
+    <string name="joystick_apps_note">Los lados recorren los elementos de Android Auto, también la barra de apps; otro control (arriba, o abajo en el modo mapa) saca el foco de dentro de una app hacia la barra. Confirmar abre la app.</string>
     <string name="joystick_reset">Restablecer al valor por defecto</string>
     <string name="joystick_control_left">Izquierda</string>
     <string name="joystick_control_right">Derecha</string>

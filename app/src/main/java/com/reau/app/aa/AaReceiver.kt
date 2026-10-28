@@ -204,6 +204,9 @@ internal class AaReceiver(
     /** A key or a wheel step for Android Auto (the dash's joystick); nothing without a session. */
     fun sendInput(command: AaCommand) {
         val transport = session ?: return AaLog.i("no Android Auto session: $command not sent")
+        if (command is AaCommand.Key && command.keycode == ServiceDiscoveryResponse.KEY_ENTER) {
+            transport.exitGuard.selectSent(SystemClock.elapsedRealtime())
+        }
         val input = AaInput(transport::send, log = { AaLog.i(it) })
         when (command) {
             is AaCommand.Key -> input.sendKey(command.keycode)
