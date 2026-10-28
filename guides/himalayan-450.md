@@ -83,6 +83,8 @@ dimensions, and the centre as **Confirm**. With that:
 **Go from app to app** (a second button on the same page) is meant for a trip such as navigation, Spotify and back, with the dash's
 media mode (left and right are the previous and next item, Confirm in the centre):
 
+![The five steps: navigation, Spotify and back](img/apps-steps.png)
+
 1. From the map, **left** once: the focus appears on the apps button. **Left** twice more reaches Spotify's icon (the microphone is
    in between); **Confirm** opens it.
 2. In Spotify, left and right move between the cards; **Confirm** opens a playlist or plays a song; **Back** goes one step back.

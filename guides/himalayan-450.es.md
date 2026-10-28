@@ -84,6 +84,8 @@ mover el foco de Android Auto en dos dimensiones y el centro como **Confirmar**.
 **Pasar de app en app** (un segundo botón en la misma pantalla) sirve para un recorrido como navegación, Spotify y de vuelta, con
 el modo multimedia del tablero (izquierda y derecha son el elemento anterior y el siguiente, Confirmar en el centro):
 
+![Los cinco pasos: navegación, Spotify y de vuelta](img/apps-steps.es.png)
+
 1. Desde el mapa, **izquierda** una vez: el foco aparece en el botón de apps. **Izquierda** dos veces más llega al icono de Spotify
    (el micrófono queda en medio); **Confirmar** lo abre.
 2. En Spotify, izquierda y derecha se mueven entre las tarjetas; **Confirmar** abre una playlist o reproduce una canción; **Atrás**
