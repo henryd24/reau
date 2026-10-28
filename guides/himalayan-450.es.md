@@ -76,8 +76,10 @@ mover el foco de Android Auto en dos dimensiones y el centro como **Confirmar**.
 - **Atrás:** un toque en Atrás.
 - **En el modo mapa del tablero**, arriba es del propio tablero (pregunta si quieres salir de la navegación) y el centro cambia a
   multimedia; por eso ahí solo hay izquierda, derecha y abajo.
-- **Cuidado con "Salir":** al abrir el menú de apps, el primer foco está en **Salir**. Si pulsas Confirmar justo entonces, cierras
-  Android Auto (REau lo vuelve a abrir en un segundo, pero se pierde la ruta en pantalla). Mueve el foco antes de confirmar.
+- **"Salir" no se alcanza por accidente:** al abrir el menú de apps, el primer foco está en **Salir**. Si Confirmar cae ahí, Android
+  Auto pide salir y REau lo rechaza (durante dos segundos después de un Confirmar del joystick), así que la sesión sigue. Eso sí, la
+  imagen queda en blanco: pulsa Confirmar otra vez en el botón de apps (conserva el foco) para volver al menú y elegir una app. Salir
+  de Android Auto a propósito se hace en la pantalla del propio teléfono.
 
 "Restablecer valores" en la misma pantalla vuelve al joystick de antes.
 

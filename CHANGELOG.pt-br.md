@@ -24,6 +24,7 @@ aparecem).
 - **Relógio do celular no vídeo**, uma chave na tela do Android Auto: o relógio do celular com milésimos, na caixa do texto de estatísticas, no painel e na prévia dessa tela, para filmar os dois juntos e ler o atraso (`guides/stream-latency.md`).
 
 ### Alterado
+- **O joystick não fecha mais o Android Auto por acidente**: um pedido para sair que chega até dois segundos depois de um Confirmar do joystick (o primeiro foco do menu de apps é "Sair") é recusado e a sessão continua; sair de propósito se faz no celular.
 - Na edição **Lite**, o REau abre sozinho os ajustes do Android Auto quando a projeção está ligada e o servidor de unidade principal desligado, sobrando dois toques (⋮ e "Iniciar servidor de unidade principal").
 - O jar do Gradle wrapper agora é o oficial, e a distribuição tem checksum.
 

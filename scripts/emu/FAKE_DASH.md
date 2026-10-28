@@ -97,7 +97,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 | `back` | 0x12 | the back button (twice within 0.7 s is the apps menu) |
 
 What REau does with each one is on the Joystick page of the app. The four arrows move Android Auto's focus; "Use the
-four arrows" sets them. In the apps menu the first focus is **Exit**: do not press Confirm right after opening it.
+four arrows" sets them. In the apps menu the first focus is **Exit**: a Confirm there is refused by REau (the picture goes blank until the menu is opened again).
 
 ## Looking at the picture
 

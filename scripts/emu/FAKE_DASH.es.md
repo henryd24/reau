@@ -97,7 +97,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 | `back` | 0x12 | el botón de atrás (dos veces en menos de 0,7 s es el menú de apps) |
 
 Lo que REau hace con cada uno está en la página del Joystick de la app. Las cuatro flechas mueven el foco de Android Auto; "Usar las
-cuatro flechas" las pone. En el menú de apps el primer foco está en **Salir**: no pulses Confirmar justo al abrirlo.
+cuatro flechas" las pone. En el menú de apps el primer foco está en **Salir**: REau rechaza un Confirmar ahí (la imagen queda en blanco hasta volver a abrir el menú).
 
 ## Mirar la imagen
 

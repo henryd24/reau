@@ -43,6 +43,9 @@ class AapTransport(
     var ignoreNextStopRequest: Boolean = false
     /** Set when VIDEO_FOCUS_NATIVE triggers a stop (user tapped Exit on the phone). */
     @Volatile var wasUserExit: Boolean = false
+
+    /** Tells a request to leave that the joystick's select caused from one the rider made on the phone. */
+    val exitGuard = ExitGuard()
     @Volatile var onQuit: ((Boolean) -> Unit)? = null
 
     /** Where video focus changes and sensor requests are counted; null counts nothing. */

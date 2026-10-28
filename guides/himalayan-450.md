@@ -75,8 +75,10 @@ dimensions, and the centre as **Confirm**. With that:
 - **Back:** one tap on Back.
 - **In the dash's map mode**, up belongs to the dash (it asks whether to leave the navigation) and the centre switches to media; so
   there only left, right and down are available.
-- **Careful with "Exit":** when the apps menu opens, the first focus is on **Exit**. Pressing Confirm right then closes Android Auto
-  (REau opens it again within a second, but the route on screen is lost). Move the focus before confirming.
+- **"Exit" cannot be reached by accident:** when the apps menu opens, the first focus is on **Exit**. If Confirm lands there, Android
+  Auto asks to leave and REau refuses (for two seconds after a Confirm from the joystick), so the session stays up. The picture goes
+  blank, though: press Confirm again on the apps button (it keeps the focus) to bring the menu back and pick an app. Leaving Android
+  Auto on purpose is done on the phone's own screen.
 
 "Reset to default" on the same page goes back to the previous joystick.
 
