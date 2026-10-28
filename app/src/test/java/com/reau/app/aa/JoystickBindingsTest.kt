@@ -144,6 +144,21 @@ class JoystickBindingsTest {
     }
 
     @Test
+    fun `the apps preset keeps the wheel on the sides and adds an arrow to leave an app for the side bar`() {
+        val page = JoystickBindings.decode(JoystickBindings.APPS.encode())
+        for (mode in Mode.entries) {
+            assertEquals(Action.WHEEL_PREVIOUS, page[Slot(mode, Control.LEFT, Gesture.ONCE)])
+            assertEquals(Action.WHEEL_NEXT, page[Slot(mode, Control.RIGHT, Gesture.ONCE)])
+        }
+        assertEquals(Action.FOCUS_LEFT, page[Slot(Mode.MEDIA, Control.UP, Gesture.ONCE)])
+        assertEquals(Action.FOCUS_RIGHT, page[Slot(Mode.MEDIA, Control.DOWN, Gesture.ONCE)])
+        assertEquals(Action.FOCUS_LEFT, page[Slot(Mode.MAP, Control.DOWN, Gesture.ONCE)])
+        assertEquals(Action.CONFIRM, page[Slot(Mode.MEDIA, Control.CENTER, Gesture.ONCE)])
+        // Home opens the apps menu on "Exit": nowhere on this page
+        assertEquals(emptySet<Slot>(), JoystickBindings.SLOTS.filter { page[it] == Action.HOME }.toSet())
+    }
+
+    @Test
     fun `the arrows preset moves the focus in both modes and keeps the dash's own controls`() {
         val page = JoystickBindings.decode(JoystickBindings.ARROWS.encode())
         for (mode in Mode.entries) {

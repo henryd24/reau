@@ -81,6 +81,19 @@ mover el foco de Android Auto en dos dimensiones y el centro como **Confirmar**.
   imagen queda en blanco: pulsa Confirmar otra vez en el botón de apps (conserva el foco) para volver al menú y elegir una app. Salir
   de Android Auto a propósito se hace en la pantalla del propio teléfono.
 
+**Pasar de app en app** (un segundo botón en la misma pantalla) sirve para un recorrido como navegación, Spotify y de vuelta, con
+el modo multimedia del tablero (izquierda y derecha son el elemento anterior y el siguiente, Confirmar en el centro):
+
+1. Desde el mapa, **izquierda** una vez: el foco aparece en el botón de apps. **Izquierda** dos veces más llega al icono de Spotify
+   (el micrófono queda en medio); **Confirmar** lo abre.
+2. En Spotify, izquierda y derecha se mueven entre las tarjetas; **Confirmar** abre una playlist o reproduce una canción; **Atrás**
+   retrocede un paso.
+3. Para salir de Spotify, **arriba** (la flecha izquierda) saca el foco a la barra lateral, sobre el icono de Spotify; **izquierda**
+   una vez más llega al de Waze; **Confirmar** devuelve el mapa.
+
+En el modo mapa del tablero, abajo hace el papel de arriba. Se probó con el tablero falso, con Waze y Spotify; falta confirmar con el
+joystick real de la moto. Evita el menú de apps (dos Atrás rápidos): su primer foco está en Salir.
+
 "Restablecer valores" en la misma pantalla vuelve al joystick de antes.
 
 ## 6. Si algo no funciona

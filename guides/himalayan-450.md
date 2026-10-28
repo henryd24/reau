@@ -80,6 +80,18 @@ dimensions, and the centre as **Confirm**. With that:
   blank, though: press Confirm again on the apps button (it keeps the focus) to bring the menu back and pick an app. Leaving Android
   Auto on purpose is done on the phone's own screen.
 
+**Go from app to app** (a second button on the same page) is meant for a trip such as navigation, Spotify and back, with the dash's
+media mode (left and right are the previous and next item, Confirm in the centre):
+
+1. From the map, **left** once: the focus appears on the apps button. **Left** twice more reaches Spotify's icon (the microphone is
+   in between); **Confirm** opens it.
+2. In Spotify, left and right move between the cards; **Confirm** opens a playlist or plays a song; **Back** goes one step back.
+3. To leave Spotify, **up** (the left arrow) takes the focus out to the side bar, on Spotify's icon; **left** once more reaches
+   Waze's; **Confirm** brings the map back.
+
+In the dash's map mode, down plays the part of up. This was tried on the fake dash with Waze and Spotify; the bike's own joystick
+is still to be confirmed. Avoid the apps menu (two quick Backs): its first focus is on Exit.
+
 "Reset to default" on the same page goes back to the previous joystick.
 
 ## 6. When something does not work

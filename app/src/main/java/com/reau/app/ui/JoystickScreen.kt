@@ -113,6 +113,13 @@ fun JoystickScreen(settings: REauSettings, onSettings: (REauSettings) -> Unit, o
                         stringResource(R.string.joystick_arrows_note),
                         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
+                    GhostButton(R.drawable.ic_ms_touch_app, stringResource(R.string.joystick_apps), "apps_joystick", {
+                        onSettings(settings.copy(joystick = JoystickBindings.APPS.encode()))
+                    })
+                    Text(
+                        stringResource(R.string.joystick_apps_note),
+                        style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                     GhostButton(R.drawable.ic_ms_restart_alt, stringResource(R.string.joystick_reset), "reset_joystick", {
                         onSettings(settings.copy(joystick = ""))
                     })
